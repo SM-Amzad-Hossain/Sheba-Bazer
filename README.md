@@ -21,6 +21,9 @@ verified service providers (মিস্ত্রি, ড্রাইভার, 
 - `blog-post.html` — single article view (`?slug=`): article with tags/like/share
   (localStorage-backed like), prev-next pager, related posts, sidebar
   (categories, recent posts, CTA); backed by `js/blog.js`
+- `about.html` — আমাদের সম্পর্কে page (green hero band with diagonal rays,
+  our story, mission/provider cards, কীভাবে কাজ করে steps, কেন সেবা বাজার,
+  CTA band)
 - `js/components.js` — single source of truth for the shared header, footer, auth modal
   and toast (injected on every page; path-aware links + active nav)
 - `js/services.js` — services-page logic: renders doctor cards, filters them via the

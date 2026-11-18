@@ -1431,3 +1431,97 @@ img, svg { display: block; }
   .blog-grid--related { grid-template-columns: 1fr; }
   .post-body { font-size: .97rem; }
 }
+
+/* ══════════ ABOUT PAGE (about.html — আমাদের সম্পর্কে) ══════════ */
+/* hero band with diagonal light rays (matches the সেবা বাজার সম্পর্কে design) */
+.about-hero {
+  padding-bottom: 34px;
+  background:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, .045) 0 2px, transparent 2px 84px),
+    radial-gradient(1100px 520px at 80% -20%, rgba(255, 255, 255, 0.14), transparent 55%),
+    linear-gradient(100deg, #0a5b32 0%, #0c7a45 35%, #0e8f4e 70%, #119a55 100%);
+}
+.about-title { margin: 14px 0 10px; font-size: clamp(2rem, 4.4vw, 3.1rem); }
+.about-sub { max-width: 720px; line-height: 1.7; }
+
+.about-body { background: #fff; padding: 34px 0 44px; }
+.about-h2 {
+  font-family: var(--font-display); font-weight: 700; color: var(--headline);
+  font-size: 1.32rem; margin: 0 0 14px;
+}
+.about-h2--mt { margin-top: 28px; }
+.about-p { color: var(--ink-soft); line-height: 1.85; margin: 0 0 12px; max-width: 900px; }
+.about-p strong { color: var(--ink); }
+
+/* shared card bits */
+.about-card-title {
+  font-family: var(--font-display); font-weight: 700; color: var(--headline);
+  font-size: 1.02rem; margin: 0 0 6px;
+}
+.about-card-text { color: var(--ink-soft); font-size: .92rem; line-height: 1.75; margin: 0; }
+
+/* লক্ষ্য / সেবাদাতাদের জন্য — icon cards */
+.about-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; }
+.about-icon-card {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: #fff; border: 1px solid #e4efe8; border-radius: 14px;
+  padding: 20px 22px; box-shadow: 0 6px 18px rgba(11, 61, 36, .05);
+}
+.about-icon-circle {
+  display: grid; place-items: center; flex: 0 0 auto;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--green-100); color: var(--green-700);
+}
+
+/* কীভাবে কাজ করে — numbered steps */
+.about-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.about-step-card {
+  background: #fff; border: 1px solid #e4efe8; border-radius: 14px;
+  padding: 18px 20px 20px; box-shadow: 0 6px 18px rgba(11, 61, 36, .05);
+}
+.about-step-num {
+  display: grid; place-items: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--green-700); color: #fff;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+  margin-bottom: 12px;
+}
+
+/* কেন সেবা বাজার — plain feature cards */
+.about-why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.about-why-card {
+  background: #fff; border: 1px solid #e4efe8; border-radius: 14px;
+  padding: 16px 18px 18px; box-shadow: 0 6px 18px rgba(11, 61, 36, .05);
+}
+.about-why-card:last-child { grid-column: 1; }
+
+/* CTA band */
+.about-cta {
+  margin-top: 28px; text-align: center;
+  border-radius: var(--radius-md); padding: 34px 24px 30px; color: #fff;
+  background:
+    radial-gradient(900px 380px at 22% -10%, rgba(255,255,255,.16), transparent 55%),
+    linear-gradient(100deg, #086b3d 0%, #0c7a45 45%, #119a55 100%);
+  box-shadow: var(--shadow-card);
+}
+.about-cta-title {
+  font-family: var(--font-display); font-weight: 800; color: #fff;
+  font-size: clamp(1.35rem, 2.6vw, 1.7rem); margin: 0 0 4px;
+}
+.about-cta-sub { color: rgba(255,255,255,.88); margin: 0 0 18px; font-size: .95rem; }
+.about-cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.about-cta-btn {
+  background: #fff; color: var(--green-800); text-decoration: none;
+  font-weight: 700; border-radius: 999px; padding: 12px 26px; font-size: .95rem;
+  box-shadow: 0 8px 20px rgba(6, 60, 33, .35); transition: transform .18s ease, box-shadow .18s ease;
+}
+.about-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(6, 60, 33, .4); }
+.about-cta-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+@media (max-width: 980px) {
+  .about-pair { grid-template-columns: 1fr; gap: 14px; }
+  .about-steps { grid-template-columns: 1fr; gap: 14px; }
+  .about-why { grid-template-columns: 1fr; gap: 14px; }
+  .about-why-card:last-child { grid-column: auto; }
+  .about-hero { padding-bottom: 24px; }
+}

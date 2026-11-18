@@ -23,7 +23,7 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
       <a href="#home" class="nav-link is-active" data-navspy="home">হোম</a>
       <a href="services.html" class="nav-link" data-navspy="services">সেবাসমূহ</a>
       <a href="blog.html" class="nav-link" data-navspy="blog">ব্লগ</a>
-      <a href="#about" class="nav-link" data-navspy="about">আমাদের সম্পর্কে</a>
+      <a href="about.html" class="nav-link" data-navspy="about">আমাদের সম্পর্কে</a>
       <a href="#contact" class="nav-link" data-navspy="contact">যোগাযোগ</a>
     </nav>
 
@@ -42,7 +42,7 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
       <a href="#home" class="mobile-link">হোম</a>
       <a href="services.html" class="mobile-link">সেবাসমূহ</a>
       <a href="blog.html" class="mobile-link">ব্লগ</a>
-      <a href="#about" class="mobile-link">আমাদের সম্পর্কে</a>
+      <a href="about.html" class="mobile-link">আমাদের সম্পর্কে</a>
       <a href="#contact" class="mobile-link">যোগাযোগ</a>
       <div class="mobile-auth">
         <button class="btn btn-outline" data-auth-open="login">লগইন</button>
@@ -67,7 +67,7 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER ══�
       <a href="#home" class="footer-link">হোম</a>
       <a href="#services" class="footer-link">সেবাসমূহ</a>
       <a href="blog.html" class="footer-link">ব্লগ</a>
-      <a href="#about" class="footer-link">আমাদের সম্পর্কে</a>
+      <a href="about.html" class="footer-link">আমাদের সম্পর্কে</a>
       <a href="#contact" class="footer-link">যোগাযোগ</a>
     </nav>
 
@@ -125,7 +125,8 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER ══�
   var isHome = path === '' || path === 'index.html';
 
   var navSpy = path === 'services.html' ? 'services'
-    : (path === 'blog.html' || path === 'blog-post.html') ? 'blog' : null;
+    : (path === 'blog.html' || path === 'blog-post.html') ? 'blog'
+    : path === 'about.html' ? 'about' : null;
   if (navSpy) {
     var home2 = (headerSlot || document).querySelector('[data-navspy="home"]');
     var target = (headerSlot || document).querySelector('[data-navspy="' + navSpy + '"]');
