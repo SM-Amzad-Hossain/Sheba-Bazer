@@ -95,10 +95,12 @@ const header = $('#siteHeader');
 const spyLinks = $$('[data-navspy]');
 const spyTargets = { home: $('#home'), services: $('#services'), about: $('#about'), contact: $('#contact') };
 
+const pageKey = (document.body && document.body.dataset.page) || '';
+
 function onScroll() {
   header.classList.toggle('is-scrolled', window.scrollY > 12);
   // scrollspy
-  let current = 'home';
+  let current = ['services', 'about', 'contact'].includes(pageKey) ? pageKey : 'home';
   for (const key of ['services', 'about', 'contact']) {
     const el = spyTargets[key];
     if (el && el.getBoundingClientRect().top <= 120) current = key;
@@ -153,6 +155,7 @@ function fillSelect(select, items, placeholder) {
 
 function attachLocationCascade(divisionId, districtId, upazilaId) {
   const divSel = $(divisionId), distSel = $(districtId), upaSel = $(upazilaId);
+  if (!divSel || !distSel || !upaSel) return;
   const data = window.BANGLADESH_LOCATIONS || [];
 
   fillSelect(divSel, data.map(d => d.division), divSel.dataset.placeholder || '-- বিভাগ --');
@@ -188,26 +191,29 @@ function attachLocationCascade(divisionId, districtId, upazilaId) {
 }
 
 // short placeholders for the hero area card
-$('#areaDivision').dataset.placeholder = 'বিভাগ';
-$('#areaDistrict').dataset.placeholder = 'জেলা';
-$('#areaUpazila').dataset.placeholder  = 'উপজেলা';
-$('#fDivision').dataset.placeholder = '-- বিভাগ --';
-$('#fDistrict').dataset.placeholder = '-- জেলা --';
-$('#fUpazila').dataset.placeholder  = '-- উপজেলা --';
-
-attachLocationCascade('#areaDivision', '#areaDistrict', '#areaUpazila');
-attachLocationCascade('#fDivision', '#fDistrict', '#fUpazila');
+if ($('#areaDivision')) {
+  $('#areaDivision').dataset.placeholder = 'বিভাগ';
+  $('#areaDistrict').dataset.placeholder = 'জেলা';
+  $('#areaUpazila').dataset.placeholder  = 'উপজেলা';
+  attachLocationCascade('#areaDivision', '#areaDistrict', '#areaUpazila');
+}
+if ($('#fDivision')) {
+  $('#fDivision').dataset.placeholder = '-- বিভাগ --';
+  $('#fDistrict').dataset.placeholder = '-- জেলা --';
+  $('#fUpazila').dataset.placeholder  = '-- উপজেলা --';
+  attachLocationCascade('#fDivision', '#fDistrict', '#fUpazila');
+}
 
 /* service dropdowns (area card + form) */
 const serviceNames = SERVICES.map(s => s.name);
-fillSelect($('#areaService'), serviceNames, 'সেবা');
-fillSelect($('#fService'), serviceNames, '-- বাছাই করুন --');
+if ($('#areaService')) fillSelect($('#areaService'), serviceNames, 'সেবা');
+if ($('#fService')) fillSelect($('#fService'), serviceNames, '-- বাছাই করুন --');
 
 /* ────────────────────────────────────────────────
    SERVICES GRID
    ──────────────────────────────────────────────── */
 const servicesGrid = $('#servicesGrid');
-servicesGrid.innerHTML = SERVICES.map(s => `
+if (servicesGrid) servicesGrid.innerHTML = SERVICES.map(s => `
   <button class="service-item" role="listitem" data-service="${s.name}" aria-label="${s.name} সেবা নির্বাচন করুন">
     <span class="service-circle">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${s.icon}</svg>
@@ -217,6 +223,7 @@ servicesGrid.innerHTML = SERVICES.map(s => `
 
 function selectService(name, { scroll = true } = {}) {
   const select = $('#fService');
+  if (!select) return;
   select.value = name;
   select.closest('.field')?.classList.remove('has-error');
 
@@ -232,7 +239,7 @@ function selectService(name, { scroll = true } = {}) {
   }
   showToast(`সেবা নির্বাচিত: ${name}`);
 }
-servicesGrid.addEventListener('click', (e) => {
+if (servicesGrid) servicesGrid.addEventListener('click', (e) => {
   const btn = e.target.closest('.service-item');
   if (btn) selectService(btn.dataset.service);
 });
@@ -240,6 +247,8 @@ servicesGrid.addEventListener('click', (e) => {
 /* ────────────────────────────────────────────────
    HERO CAROUSEL
    ──────────────────────────────────────────────── */
+const heroBadgeEl = $('#heroBadge');
+if (heroBadgeEl) {
 const heroCopy = $('.hero-copy');
 const heroBadge = $('#heroBadge');
 const heroTitle = $('#heroTitle');
@@ -282,11 +291,17 @@ startHeroAutoplay();
 $('#heroCta').addEventListener('click', () => {
   scrollToEl($('#area'), { behavior: 'smooth', block: 'center' });
 });
+}
 
 /* ────────────────────────────────────────────────
    AREA FILTER FORM
    ──────────────────────────────────────────────── */
-$('#areaFilterForm').addEventListener('submit', (e) => {
+const areaFilterForm = $('#areaFilterForm');
+/* Services page: no submit button in the card — apply the filter on any change */
+if (areaFilterForm && !areaFilterForm.querySelector('[type="submit"]')) {
+  areaFilterForm.addEventListener('change', () => { if (areaFilterForm.requestSubmit) areaFilterForm.requestSubmit(); });
+}
+if (areaFilterForm) areaFilterForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const div = $('#areaDivision').value, dist = $('#areaDistrict').value,
         upa = $('#areaUpazila').value, svc = $('#areaService').value;
@@ -297,6 +312,13 @@ $('#areaFilterForm').addEventListener('submit', (e) => {
   if (!svc) missing.push('সেবা');
   if (missing.length) {
     showToast(`অনুগ্রহ করে বেছে নিন: ${missing.join(', ')}`, 'error');
+    return;
+  }
+  const preDivision = $('#fDivision');
+  if (!preDivision) {
+    document.dispatchEvent(new CustomEvent('sheba:filter-applied', {
+      detail: { division: div, district: dist, upazila: upa, service: svc }
+    }));
     return;
   }
   // prefill request form
@@ -312,6 +334,7 @@ $('#areaFilterForm').addEventListener('submit', (e) => {
    AD CAROUSEL
    ──────────────────────────────────────────────── */
 const adTrack = $('#adTrack');
+if (adTrack) {
 const adDots = $('#adDots');
 let adIndex = 0, adTimer = null;
 
@@ -349,16 +372,18 @@ adTrack.addEventListener('click', (e) => {
   }
 });
 startAdAutoplay();
+}
 
 /* ────────────────────────────────────────────────
    TRUSTED PARTNERS
    ──────────────────────────────────────────────── */
-$('#partnersRow').innerHTML = PARTNERS.map(p => `
+const partnersRow = $('#partnersRow');
+if (partnersRow) partnersRow.innerHTML = PARTNERS.map(p => `
   <button class="partner" aria-label="${p.name}">
     <span class="partner-seal">${p.letter}</span>
     <span class="partner-name">${p.name}</span>
   </button>`).join('');
-$('#partnersRow').addEventListener('click', (e) => {
+if (partnersRow) partnersRow.addEventListener('click', (e) => {
   const btn = e.target.closest('.partner');
   if (btn) showToast(`${btn.getAttribute('aria-label')} — বিশ্বস্ত পরিবহন পার্টনার।`);
 });
@@ -366,7 +391,8 @@ $('#partnersRow').addEventListener('click', (e) => {
 /* ────────────────────────────────────────────────
    FEATURES (ABOUT)
    ──────────────────────────────────────────────── */
-$('#featuresGrid').innerHTML = FEATURES.map(f => `
+const featuresGrid = $('#featuresGrid');
+if (featuresGrid) featuresGrid.innerHTML = FEATURES.map(f => `
   <div class="feature-card">
     <span class="feature-num">${f.n}</span>
     <span>
@@ -379,6 +405,7 @@ $('#featuresGrid').innerHTML = FEATURES.map(f => `
    SEARCH WITH LIVE SUGGESTIONS
    ──────────────────────────────────────────────── */
 const searchInput = $('#serviceSearch');
+if (searchInput) {
 const suggestList = $('#suggestList');
 const searchBtn = $('#searchBtn');
 let suggestIndex = -1;
@@ -464,6 +491,7 @@ function runSearch() {
   }
 }
 searchBtn.addEventListener('click', () => { runSearch(); closeSuggestions(); });
+}
 
 /* ────────────────────────────────────────────────
    TAKE / GIVE TABS
@@ -472,13 +500,15 @@ const tabTake = $('#tabTake'), tabGive = $('#tabGive');
 const fServiceLabel = $('#fServiceLabel'), submitBtn = $('#submitBtn');
 
 function setGiveTab(give) {
+  if (!tabTake || !tabGive) return;
   tabTake.classList.toggle('is-active', !give);
   tabGive.classList.toggle('is-active', give);
   tabTake.setAttribute('aria-selected', String(!give));
   tabGive.setAttribute('aria-selected', String(give));
-  fServiceLabel.innerHTML = give ? 'আপনি কোন সেবা দিতে চান? <i>*</i>' : 'কোন সেবা দরকার <i>*</i>';
-  submitBtn.textContent = give ? 'সেবাদাতা হিসেবে আবেদন পাঠান' : 'সেবার অনুরোধ পাঠান';
+  if (fServiceLabel) fServiceLabel.innerHTML = give ? 'আপনি কোন সেবা দিতে চান? <i>*</i>' : 'কোন সেবা দরকার <i>*</i>';
+  if (submitBtn) submitBtn.textContent = give ? 'সেবাদাতা হিসেবে আবেদন পাঠান' : 'সেবার অনুরোধ পাঠান';
 }
+if (tabTake && tabGive) {
 tabTake.addEventListener('click', () => setGiveTab(false));
 tabGive.addEventListener('click', () => setGiveTab(true));
 $('#providerRegisterBtn').addEventListener('click', () => {
@@ -487,10 +517,15 @@ $('#providerRegisterBtn').addEventListener('click', () => {
   showToast('সেবাদাতা নিবন্ধন ফর্ম প্রস্তুত — তথ্য পূরণ করুন।');
 });
 
+  /* landing page deep-link: index.html#register opens the provider tab */
+  if (location.hash === '#register') setGiveTab(true);
+}
+
 /* ────────────────────────────────────────────────
    REQUEST FORM — validation & submit
    ──────────────────────────────────────────────── */
 const requestForm = $('#requestForm');
+if (requestForm) {
 const successPanel = $('#requestSuccess');
 
 function setFieldError(input, hasError) {
@@ -553,6 +588,7 @@ $$('.field-input, select.field-input', requestForm).forEach(el => {
   el.addEventListener('input', () => el.closest('.field')?.classList.remove('has-error'));
   el.addEventListener('change', () => el.closest('.field')?.classList.remove('has-error'));
 });
+}
 
 /* ────────────────────────────────────────────────
    STAT COUNTERS
@@ -661,6 +697,11 @@ authForm.addEventListener('submit', (e) => {
   authForm.reset();
 });
 $$('.field-input', authForm).forEach(el => el.addEventListener('input', () => el.closest('.field')?.classList.remove('has-error')));
+
+/* shared data for the services page (single source of truth) */
+window.shebaServices = SERVICES;
+window.shebaAdSlides = AD_SLIDES;
+window.shebaToast = showToast;
 
 /* ────────────────────────────────────────────────
    FOOTER YEAR (Bengali numerals)

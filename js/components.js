@@ -118,4 +118,23 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER ══�
   var footerSlot = document.getElementById('app-footer');
   if (headerSlot) headerSlot.innerHTML = window.SHEBA_BAZER_HEADER;
   if (footerSlot) footerSlot.innerHTML = window.SHEBA_BAZER_FOOTER;
+
+  /* Multi-page support: off the landing page, fragment links must
+     point back at index.html (except #contact — the footer exists everywhere). */
+  var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  var isHome = path === '' || path === 'index.html';
+
+  if (path === 'services.html') {
+    var home = (headerSlot || document).querySelector('[data-navspy="home"]');
+    var svc = (headerSlot || document).querySelector('[data-navspy="services"]');
+    if (home) home.classList.remove('is-active');
+    if (svc) svc.classList.add('is-active');
+  }
+
+  if (!isHome) {
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      var frag = a.getAttribute('href');
+      if (frag.length > 1 && frag !== '#contact') a.setAttribute('href', 'index.html' + frag);
+    });
+  }
 })();
