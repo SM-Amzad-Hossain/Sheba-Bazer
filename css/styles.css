@@ -208,7 +208,7 @@ img, svg { display: block; }
 .hero-grid {
   display: grid; grid-template-columns: 1.02fr 1fr; align-items: center;
   gap: 24px; min-height: 544px;
-  padding: 120px 0 110px;
+  padding: 120px 0 30px;
   position: relative;
 }
 
@@ -262,7 +262,7 @@ img, svg { display: block; }
 .fort-scene { width: min(100%, 560px); height: auto; }
 
 /* ══════════ AREA FILTER CARD ══════════ */
-.area-card-wrap { position: relative; z-index: 5; margin-top: -74px; }
+.area-card-wrap { position: relative; z-index: 5; margin: 6px 0 64px; }
 .area-card {
   background: #fff;
   border-radius: var(--radius-lg);
@@ -708,7 +708,7 @@ img, svg { display: block; }
   .hero-grid {
     grid-template-columns: 1fr;
     min-height: 0; text-align: left;
-    padding: 92px 0 96px; gap: 8px;
+    padding: 92px 0 22px; gap: 8px;
   }
   .hero-art { order: -1; }
   .fort-scene { width: min(100%, 400px); margin-inline: auto; }
@@ -716,7 +716,7 @@ img, svg { display: block; }
   .btn-hero { margin-top: 22px; }
 
   .area-grid { grid-template-columns: 1fr 1fr; }
-  .area-card-wrap { margin-top: -64px; }
+  .area-card-wrap { margin: 4px 0 56px; }
 
   .services-grid { grid-template-columns: repeat(4, 1fr); gap: 22px 6px; }
   .service-circle { width: 82px; height: 82px; }
