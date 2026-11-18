@@ -142,12 +142,15 @@ img, svg { display: block; }
 }
 
 .header-inner {
-  height: 74px;
+  height: 88px;                       /* site open: taller bar */
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  transition: height .38s cubic-bezier(.4, 0, .2, 1);
 }
+.site-header.is-scrolled .header-inner { height: 66px; }   /* normal height when sticky */
 
 .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
-.logo-mark { height: auto; display: block; filter: drop-shadow(0 2px 3px rgba(11,61,36,.18)); }
+.logo-mark { height: auto; display: block; filter: drop-shadow(0 2px 3px rgba(11,61,36,.18)); transition: transform .38s cubic-bezier(.4, 0, .2, 1); }
+.site-header.is-scrolled .header-inner .logo-mark { transform: scale(.88); }
 
 .desktop-nav { display: flex; align-items: center; gap: 6px; }
 .nav-link {
@@ -196,10 +199,10 @@ img, svg { display: block; }
 .mobile-auth { display: flex; gap: 12px; margin-top: 12px; }
 .mobile-auth .btn { flex: 1; }
 
-/* ══════════ HERO ══════════ */
+/* ══════════ HERO ══════════
+   Hero paints from the very top of the document, behind the fixed transparent header. */
 .hero {
-  /* hero paints behind the fixed transparent header (74px desktop / 66px mobile) */
-  margin-top: -74px;
+  padding-bottom: 80px;
   background:
     radial-gradient(1100px 500px at 78% -10%, #ffffff 0%, rgba(255,255,255,0) 55%),
     var(--mint);
@@ -262,7 +265,7 @@ img, svg { display: block; }
 .fort-scene { width: min(100%, 560px); height: auto; }
 
 /* ══════════ AREA FILTER CARD ══════════ */
-.area-card-wrap { position: relative; z-index: 5; margin: 6px 0 64px; }
+.area-card-wrap { position: relative; z-index: 5; margin: 6px 0 0; }
 .area-card {
   background: #fff;
   border-radius: var(--radius-lg);
@@ -303,7 +306,6 @@ img, svg { display: block; }
 
 /* ══════════ SERVICES ══════════ */
 .services {
-  margin-top: 64px;
   background:
     radial-gradient(1200px 600px at 15% 0%, rgba(255,255,255,.09), transparent 60%),
     radial-gradient(circle at 50% 50%, transparent 0 90%, rgba(0,0,0,.08)),
@@ -702,8 +704,8 @@ img, svg { display: block; }
   .desktop-nav { display: none; }
   .hamburger { display: flex; }
   .header-actions .btn { display: none; }
-  .header-inner { height: 66px; }
-  .hero { margin-top: -66px; }
+  .header-inner { height: 76px; }
+  .site-header.is-scrolled .header-inner { height: 60px; }
 
   .hero-grid {
     grid-template-columns: 1fr;
@@ -716,7 +718,7 @@ img, svg { display: block; }
   .btn-hero { margin-top: 22px; }
 
   .area-grid { grid-template-columns: 1fr 1fr; }
-  .area-card-wrap { margin: 4px 0 56px; }
+  .area-card-wrap { margin: 4px 0 0; }
 
   .services-grid { grid-template-columns: repeat(4, 1fr); gap: 22px 6px; }
   .service-circle { width: 82px; height: 82px; }
