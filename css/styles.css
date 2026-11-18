@@ -147,7 +147,7 @@ img, svg { display: block; }
 }
 
 .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
-.logo-mark { width: 52px; height: auto; filter: drop-shadow(0 2px 3px rgba(11,61,36,.18)); }
+.logo-mark { height: auto; display: block; filter: drop-shadow(0 2px 3px rgba(11,61,36,.18)); }
 
 .desktop-nav { display: flex; align-items: center; gap: 6px; }
 .nav-link {
@@ -603,10 +603,12 @@ img, svg { display: block; }
   gap: 48px; padding: 58px 24px 34px;
 }
 .logo--footer { gap: 10px; }
-.logo--footer .logo-mark { width: 44px; }
-.footer-brand-text {
-  font-family: var(--font-display); font-weight: 800;
-  color: #fff; font-size: 1.35rem;
+.logo--footer .logo-mark {
+  width: 84px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 7px 9px;           /* light tile keeps the dark wordmark legible on the dark footer */
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
 }
 .footer-tagline { margin-top: 14px; font-size: .95rem; color: #a8c9b4; max-width: 34ch; }
 
@@ -657,7 +659,7 @@ img, svg { display: block; }
 }
 .auth-close:hover { background: #dcefe4; }
 .auth-logo { display: flex; justify-content: center; margin-bottom: 6px; }
-.logo-mark--sm { width: 74px; }
+.logo-mark--sm { width: 104px; }
 .auth-title { font-family: var(--font-display); color: var(--headline); font-size: 1.5rem; font-weight: 800; }
 .auth-sub { color: var(--ink-soft); font-size: .92rem; margin-top: 4px; }
 .auth-form { margin-top: 18px; text-align: left; display: flex; flex-direction: column; gap: 12px; }
@@ -728,7 +730,7 @@ img, svg { display: block; }
 @media (max-width: 620px) {
   .container { width: min(1200px, 100% - 32px); }
   .header-actions { gap: 8px; }
-  .logo-mark { width: 46px; }
+  .header-inner .logo-mark { width: 50px; }
 
   .ad-slide { padding: 22px 64px 26px; }
   .ad-arrow { width: 38px; height: 38px; }

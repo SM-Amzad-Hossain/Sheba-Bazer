@@ -29,7 +29,7 @@ python3 -m http.server 8080 --bind 0.0.0.0
   - ad banner carousel (autoplay, arrows, dots)
   - লগইন / সাইন আপ modal with validation
   - animated Bengali-numeral stat counters, scroll-reveal, scrollspy nav, mobile hamburger menu, toasts
-- `assets/` — SVG favicon, logo, and self-hosted fonts (OFL)
+- `assets/` — the সেবা বাজার logo (PNG, used as icon everywhere) and self-hosted fonts (OFL)
 
 ## Notes
 
