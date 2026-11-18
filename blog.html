@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b6e3c" />
+  <title>ব্লগ | সেবা বাজার — স্থানীয় সেবা নিয়ে টিপস ও গাইড</title>
+  <meta name="description" content="ডাক্তার দেখানো, ইলেকট্রিশিয়ান, প্লাম্বার, ফ্রিজ-এসি মেরামত — সাতক্ষীরার স্থানীয় সেবা নিয়ে ব্যবহারিক টিপস, গাইড ও পরামর্শ।" />
+  <meta property="og:title" content="ব্লগ | সেবা বাজার" />
+  <meta property="og:description" content="স্থানীয় সেবা নিয়ে টিপস, গাইড ও পরামর্শ।" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="assets/sheba-bazer-logo.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="page-services page-blog" data-page="blog">
+
+<div id="app-header"></div>
+
+<main>
+
+  <!-- ══════════ BLOG HERO BAND ══════════ -->
+  <section class="svc-hero" aria-label="সেবা বাজার ব্লগ">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="svc-crumb" aria-label="বর্তমান পাতা">
+        <a href="index.html">হোম</a>
+        <span class="svc-crumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page">ব্লগ</span>
+      </nav>
+
+      <!-- Head: icon + title -->
+      <div class="svc-head">
+        <span class="svc-head-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5V5.5Z"/>
+            <path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20"/>
+            <path d="M8.5 7.5h7M8.5 11h7M8.5 14.5h4.5"/>
+          </svg>
+        </span>
+        <div class="svc-head-copy">
+          <h1 class="svc-title">সেবা বাজার ব্লগ</h1>
+          <p class="svc-sub">ডাক্তার, ইলেকট্রিশিয়ান, প্লাম্বার — সাতক্ষীরার দৈনন্দিন সেবা নিয়ে টিপস, গাইড ও পরামর্শ।</p>
+          <span class="svc-count" id="blogCountBadge" role="status">৬টি আর্টিকেল</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FEATURED POST ══════════ -->
+  <section class="blog-featured-wrap" aria-label="নির্বাচিত আর্টিকেল">
+    <div class="container">
+      <a class="blog-featured" id="blogFeatured" href="blog-post.html"></a>
+    </div>
+  </section>
+
+  <!-- ══════════ TOOLBAR: search + category chips ══════════ -->
+  <section class="blog-toolbar-wrap" aria-label="আর্টিকেল ফিল্টার">
+    <div class="container">
+      <form class="blog-toolbar" id="blogSearchForm" role="search">
+        <label class="blog-search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="blogSearch" class="blog-search-input" placeholder="আর্টিকেল খুঁজুন…" autocomplete="off" aria-label="আর্টিকেল খুঁজুন" />
+        </label>
+        <div class="blog-chips" id="blogChips" role="group" aria-label="ক্যাটাগরি"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══════════ ARTICLE GRID ══════════ -->
+  <section class="blog-list" aria-label="সকল আর্টিকেল">
+    <div class="container">
+      <div class="blog-grid" id="blogGrid"></div>
+      <div class="blog-empty" id="blogEmpty" hidden>
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <p><strong>কিছু পাওয়া যায়নি।</strong> অন্য শব্দ দিয়ে খুঁজে দেখুন, বা ক্যাটাগরি বদলান।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ NEWSLETTER ══════════ -->
+  <section class="blog-news-wrap" aria-label="নিউজলেটার">
+    <div class="container">
+      <form class="blog-news" id="blogNewsletterForm" novalidate>
+        <div class="blog-news-copy">
+          <h2 class="blog-news-title">সপ্তাহে একবার, সরাসরি ইনবক্সে</h2>
+          <p class="blog-news-sub">স্থানীয় সেবা ও বাড়ির রক্ষণাবেক্ষণ টিপস — কোনো স্প্যাম ছাড়াই।</p>
+        </div>
+        <div class="blog-news-fields">
+          <label class="blog-search blog-news-input">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            <input type="email" id="blogNewsletterEmail" class="blog-search-input" placeholder="your@email.com" required aria-label="ইমেইল ঠিকানা" />
+          </label>
+          <button type="submit" class="btn btn-solid btn-lg">সাবস্ক্রাইব করুন</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<div id="app-footer"></div>
+
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/blog-data.js"></script>
+<script src="js/blog.js"></script>
+</body>
+</html>

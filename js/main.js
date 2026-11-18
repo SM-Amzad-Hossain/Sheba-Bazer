@@ -100,7 +100,7 @@ const pageKey = (document.body && document.body.dataset.page) || '';
 function onScroll() {
   header.classList.toggle('is-scrolled', window.scrollY > 12);
   // scrollspy
-  let current = ['services', 'about', 'contact'].includes(pageKey) ? pageKey : 'home';
+  let current = ['services', 'about', 'blog', 'contact'].includes(pageKey) ? pageKey : 'home';
   for (const key of ['services', 'about', 'contact']) {
     const el = spyTargets[key];
     if (el && el.getBoundingClientRect().top <= 120) current = key;
@@ -131,12 +131,6 @@ document.addEventListener('click', (e) => {
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobileMenu(); });
 
-/* Blog placeholder links */
-$$('[data-blog-link]').forEach(a => a.addEventListener('click', (e) => {
-  e.preventDefault();
-  closeMobileMenu();
-  showToast('ব্লগ বিভাগটি শীঘ্রই যুক্ত হচ্ছে — সাথে থাকুন!');
-}));
 
 /* ────────────────────────────────────────────────
    LOCATION CASCADE (shared helper)
