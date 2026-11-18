@@ -760,19 +760,11 @@ img, svg { display: block; }
   html { scroll-behavior: auto; }
 }
 
-/* ══════════ SERVICES PAGE (services.html — ডাক্তার পাওয়া) ══════════ */
-.page-services .site-header {
-  position: sticky; top: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #edf3ee;
-}
-.page-services .site-header.is-scrolled,
-.page-services .site-header.menu-open {
-  background: #ffffff;
-  backdrop-filter: none; -webkit-backdrop-filter: none;
-  border-bottom-color: #e6efea;
-  box-shadow: 0 10px 28px rgba(11, 61, 36, 0.10);
-}
+/* ══════════ SERVICES PAGE (services.html — ডাক্তার পাওয়া) ══════════
+   Inner pages use the same transparent fixed header as the home page:
+   a mint strip sits behind the bar (body background), like the home hero. */
+.page-services { background: var(--mint); }
+.page-services main { padding-top: 88px; }
 
 /* ── green hero band ── */
 .svc-hero {
@@ -946,6 +938,7 @@ img, svg { display: block; }
 
 /* ── responsive ── */
 @media (max-width: 980px) {
+  .page-services main { padding-top: 76px; }
   .svc-hero { padding: 10px 0 20px; }
   .svc-crumb { font-size: .72rem; }
   .svc-head { gap: 15px; margin-top: 16px; }
