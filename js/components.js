@@ -16,34 +16,7 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
   <div class="container header-inner">
     <a class="logo" href="#home" aria-label="সেবা বাজার — হোম">
       <!-- Brand mark: green shopping bag with white "সেবা", orange speed-lines + swoosh -->
-      <svg class="logo-mark" viewBox="0 0 124 148" role="img" aria-label="সেবা বাজার লোগো" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="bagGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#17A95B"/>
-            <stop offset=".55" stop-color="#0E8F4C"/>
-            <stop offset="1" stop-color="#0B6E3C"/>
-          </linearGradient>
-        </defs>
-        <!-- orange speed lines -->
-        <g stroke="#F58634" stroke-width="6" stroke-linecap="round">
-          <line x1="4"  y1="52" x2="28" y2="46"/>
-          <line x1="1"  y1="66" x2="26" y2="62"/>
-          <line x1="6"  y1="80" x2="24" y2="78"/>
-        </g>
-        <!-- bag body -->
-        <path d="M30 40 L92 40 L101 96 Q101 104 93 104 L29 104 Q21 104 21 96 Z"
-              fill="url(#bagGrad)" stroke="#0A5B32" stroke-width="7" stroke-linejoin="round"/>
-        <!-- handle -->
-        <path d="M44 40 C44 21 52 12 61 12 C70 12 79 21 79 40"
-              fill="none" stroke="#0A5B32" stroke-width="8" stroke-linecap="round"/>
-        <!-- word inside bag -->
-        <text x="61" y="88" text-anchor="middle" font-family="'Baloo Da 2','Hind Siliguri',sans-serif" font-weight="800" font-size="33" fill="#FFFFFF" stroke="#0A5B32" stroke-width="1.4" stroke-linejoin="round">সেবা</text>
-        <!-- orange swoosh across the bag -->
-        <path d="M24 98 C46 106 82 100 108 72" fill="none" stroke="#F58634" stroke-width="6" stroke-linecap="round"/>
-        <!-- বাজার -->
-        <text x="62" y="132" text-anchor="middle" font-family="'Baloo Da 2','Hind Siliguri',sans-serif" font-weight="800" font-size="33" fill="#0A5B32">বাজার</text>
-        <path d="M22 142 C48 149 80 147 106 128" fill="none" stroke="#F58634" stroke-width="5.5" stroke-linecap="round"/>
-      </svg>
+      <img class="logo-mark" src="assets/sheba-bazer-logo.png" width="60" alt="সেবা বাজার লোগো" />
     </a>
 
     <nav class="desktop-nav" aria-label="প্রধান নেভিগেশন">
@@ -84,21 +57,7 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER ══�
   <div class="container footer-grid">
     <div class="footer-brand">
       <a class="logo logo--footer" href="#home" aria-label="সেবা বাজার">
-        <svg class="logo-mark" viewBox="0 2 124 108" role="img" aria-label="সেবা বাজার লোগো" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="bagGradFooter" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#17A95B"/><stop offset=".55" stop-color="#0E8F4C"/><stop offset="1" stop-color="#0B6E3C"/>
-            </linearGradient>
-          </defs>
-          <g stroke="#F58634" stroke-width="6" stroke-linecap="round">
-            <line x1="4"  y1="52" x2="28" y2="46"/><line x1="1"  y1="66" x2="26" y2="62"/><line x1="6"  y1="80" x2="24" y2="78"/>
-          </g>
-          <path d="M30 40 L92 40 L101 96 Q101 104 93 104 L29 104 Q21 104 21 96 Z" fill="url(#bagGradFooter)" stroke="#0A5B32" stroke-width="7" stroke-linejoin="round"/>
-          <path d="M44 40 C44 21 52 12 61 12 C70 12 79 21 79 40" fill="none" stroke="#0A5B32" stroke-width="8" stroke-linecap="round"/>
-          <text x="61" y="88" text-anchor="middle" font-family="'Baloo Da 2','Hind Siliguri',sans-serif" font-weight="800" font-size="33" fill="#FFFFFF" stroke="#0A5B32" stroke-width="1.4" stroke-linejoin="round">সেবা</text>
-          <path d="M24 98 C46 106 82 100 108 72" fill="none" stroke="#F58634" stroke-width="6" stroke-linecap="round"/>
-        </svg>
-        <span class="footer-brand-text">সেবা বাজার</span>
+        <img class="logo-mark logo-mark--footer" src="assets/sheba-bazer-logo.png" width="84" alt="সেবা বাজার লোগো" />
       </a>
       <p class="footer-tagline">আপনার এলাকার দক্ষ সেবাদাতা এক জায়গায়।</p>
     </div>
@@ -131,15 +90,7 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER ══�
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
     <div class="auth-logo">
-      <svg class="logo-mark logo-mark--sm" viewBox="0 2 124 108" role="img" aria-label="সেবা বাজার লোগো" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#F58634" stroke-width="7" stroke-linecap="round">
-          <line x1="4"  y1="52" x2="28" y2="46"/><line x1="1"  y1="66" x2="26" y2="62"/><line x1="6"  y1="80" x2="24" y2="78"/>
-        </g>
-        <path d="M30 40 L92 40 L101 96 Q101 104 93 104 L29 104 Q21 104 21 96 Z" fill="#0E8F4C" stroke="#0A5B32" stroke-width="8" stroke-linejoin="round"/>
-        <path d="M44 40 C44 21 52 12 61 12 C70 12 79 21 79 40" fill="none" stroke="#0A5B32" stroke-width="9" stroke-linecap="round"/>
-        <text x="61" y="88" text-anchor="middle" font-family="'Baloo Da 2','Hind Siliguri',sans-serif" font-weight="800" font-size="33" fill="#FFFFFF">সেবা</text>
-        <path d="M24 98 C46 106 82 100 108 72" fill="none" stroke="#F58634" stroke-width="7" stroke-linecap="round"/>
-      </svg>
+      <img class="logo-mark logo-mark--sm" src="assets/sheba-bazer-logo.png" width="104" alt="সেবা বাজার লোগো" />
     </div>
     <h2 class="auth-title" id="authTitle">লগইন করুন</h2>
     <p class="auth-sub" id="authSub">আপনার মোবাইল নম্বর দিয়ে সহজেই লগইন করুন</p>
