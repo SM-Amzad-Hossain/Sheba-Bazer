@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b6e3c" />
+  <title>যোগাযোগ | সেবা বাজার — আমাদের সাথে কথা বলুন</title>
+  <meta name="description" content="সেবা বাজারের সাথে যোগাযোগ করুন — প্রশ্ন, মতামত, সেবার অনুরোধ বা অভিযোগ। সাতক্ষীরা সদর, খুলনা বিভাগ। সরাসরি ফোন, হোয়াটসঅ্যাপ বা মেসেজ পাঠান।" />
+  <meta property="og:title" content="যোগাযোগ | সেবা বাজার" />
+  <meta property="og:description" content="আমরা সাহায্য করতে প্রস্তুত — ফোন, হোয়াটসঅ্যাপ বা মেসেজ পাঠান।" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="assets/sheba-bazer-logo.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="page-services page-contact" data-page="contact">
+
+<div id="app-header"></div>
+
+<main>
+
+  <!-- ══════════ CONTACT HERO BAND (with diagonal rays) ══════════ -->
+  <section class="svc-hero about-hero" aria-label="যোগাযোগ">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="svc-crumb" aria-label="বর্তমান পাতা">
+        <a href="index.html">হোম</a>
+        <span class="svc-crumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page">যোগাযোগ</span>
+      </nav>
+
+      <h1 class="svc-title about-title">যোগাযোগ</h1>
+      <p class="svc-sub about-sub">প্রশ্ন, মতামত বা সেবার অনুরোধ — সরাসরি আমাদের সাথে কথা বলুন।</p>
+    </div>
+  </section>
+
+  <!-- ══════════ CONTACT BODY ══════════ -->
+  <section class="contact-body" aria-label="মেসেজ পাঠান ও যোগাযোগের তথ্য">
+    <div class="container contact-shell">
+
+      <!-- ══════════ FORM CARD ══════════ -->
+      <form class="contact-card contact-form" id="contactForm" novalidate>
+        <h2 class="contact-title">মেসেজ পাঠান</h2>
+        <p class="contact-sub">ফর্মটি পূরণ করুন, আমরা যত দ্রুত সম্ভব যোগাযোগ করব।</p>
+
+        <div class="contact-grid">
+          <div class="field">
+            <label class="field-label" for="contactName">আপনার নাম <i>*</i></label>
+            <input type="text" id="contactName" class="field-input" placeholder="নাম লিখুন" autocomplete="name" required />
+            <p class="field-error">অনুগ্রহ করে আপনার নাম লিখুন।</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="contactPhone">মোবাইল নম্বর <i>*</i></label>
+            <input type="tel" id="contactPhone" class="field-input" placeholder="01XXXXXXXXX" inputmode="numeric" maxlength="11" autocomplete="tel" required />
+            <p class="field-error">সঠিক ১১-সংখ্যার মোবাইল নম্বর দিন।</p>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="field">
+            <label class="field-label" for="contactEmail">ইমেইল <span class="contact-optional">(ঐচ্ছিক)</span></label>
+            <input type="email" id="contactEmail" class="field-input" placeholder="your@email.com" autocomplete="email" />
+            <p class="field-error">সঠিক ইমেইল ঠিকানা দিন।</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="contactSubject">বিষয় <i>*</i></label>
+            <label class="select-wrap">
+              <select id="contactSubject" class="select-input" required>
+                <option value="">বিষয় বেছে নিন</option>
+                <option value="সাধারণ জিজ্ঞাসা">সাধারণ জিজ্ঞাসা</option>
+                <option value="সেবা নিতে চাই">সেবা নিতে চাই</option>
+                <option value="সেবাদাতা হতে চাই">সেবাদাতা হতে চাই</option>
+                <option value="বিজ্ঞাপন দিতে চাই">বিজ্ঞাপন দিতে চাই</option>
+                <option value="অভিযোগ / সমস্যার কথা জানাতে চাই">অভিযোগ / সমস্যার কথা জানাতে চাই</option>
+              </select>
+              <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </label>
+            <p class="field-error">অনুগ্রহ করে বিষয় বেছে নিন।</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="contactMessage">আপনার বার্তা <i>*</i></label>
+          <textarea id="contactMessage" class="field-input contact-textarea" placeholder="আপনার প্রশ্ন বা প্রয়োজন বিস্তারিত লিখুন…" rows="5" required></textarea>
+          <p class="field-error">কমপক্ষে ১০ অক্ষরের বার্তা লিখুন।</p>
+        </div>
+
+        <button type="submit" class="btn btn-solid btn-lg contact-submit" id="contactSubmit">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          মেসেজ পাঠান
+        </button>
+        <p class="contact-note">আমরা তথ্য সঠিক রেখেছি — মেসেজ জমা হলে আমরা আপনার নম্বরে কল বা মেসেজ করি।</p>
+      </form>
+
+      <!-- ══════════ SIDEBAR ══════════ -->
+      <aside class="contact-side" aria-label="যোগাযোগের তথ্য">
+
+        <div class="contact-card">
+          <h2 class="contact-title contact-title--sm">সরাসরি কথা বলুন</h2>
+          <a class="btn btn-solid sp-full-btn contact-side-btn" href="tel:01700000000">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l3.27-1.27a2 2 0 0 1 2.11.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            ০১XXX-XXXXXX
+          </a>
+          <a class="btn btn-outline sp-full-btn contact-side-btn" href="https://wa.me/8801700000000" target="_blank" rel="noopener">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            হোয়াটসঅ্যাপে মেসেজ
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <h2 class="contact-title contact-title--sm">যোগাযোগের তথ্য</h2>
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-item-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span><strong>ঠিকানা</strong><br />সাতক্ষীরা সদর, সাতক্ষীরা, খুলনা বিভাগ, বাংলাদেশ</span>
+            </li>
+            <li class="contact-item">
+              <span class="contact-item-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+              <span><strong>ইমেইল</strong><br /><a class="contact-link" href="mailto:info@example.com">info@example.com</a></span>
+            </li>
+            <li class="contact-item">
+              <span class="contact-item-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+              <span><strong>অফিস সময়</strong><br />শনিবার–বৃহস্পতিবার, সকাল ৯:০০ – সন্ধ্যা ৬:০০<br />শুক্রবার: সাপ্তাহিক বন্ধ</span>
+            </li>
+          </ul>
+
+          <!-- Map tile -->
+          <a class="contact-map" href="https://www.google.com/maps/search/Satkhira+Sadar" target="_blank" rel="noopener" aria-label="গুগল ম্যাপে সাতক্ষীরা সদর দেখুন">
+            <svg viewBox="0 0 320 120" class="contact-map-art" aria-hidden="true">
+              <rect width="320" height="120" fill="#e7f5ec"/>
+              <path d="M0 78h320M60 0v120M150 0v120M240 0v120" stroke="#cfe8d8" stroke-width="14"/>
+              <path d="M0 30h320M0 108h320M112 0v120M292 0v120" stroke="#f4fbf6" stroke-width="6"/>
+              <circle cx="160" cy="46" r="16" fill="#0b6e3c"/>
+              <circle cx="160" cy="46" r="6.5" fill="#fff"/>
+              <circle cx="160" cy="46" r="26" fill="none" stroke="#0b6e3c" stroke-opacity=".35" stroke-width="4"/>
+            </svg>
+            <span class="contact-map-label">গুগল ম্যাপে দেখুন
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+            </span>
+          </a>
+        </div>
+
+        <div class="contact-card contact-quick">
+          <h2 class="contact-title contact-title--sm">দ্রুত যান</h2>
+          <a class="contact-quick-link" href="services.html">সেবা খুঁজুন
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a class="contact-quick-link" href="blog.html">ব্লগ পড়ুন
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a class="contact-quick-link" href="about.html">আমাদের সম্পর্কে
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="app-footer"></div>
+
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/contact.js"></script>
+</body>
+</html>
