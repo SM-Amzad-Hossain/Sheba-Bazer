@@ -4,15 +4,6 @@ A pixel-faithful, fully responsive implementation of the **সেবা বা�
 service-detail page — a local-services marketplace where people in Bangladesh book
 verified service providers (মিস্ত্রি, ড্রাইভার, ইলেকট্রিশিয়ান…) from one place.
 
-## Run it
-
-No build step — it's a static site. Serve the folder and open it:
-
-```bash
-python3 -m http.server 8080 --bind 0.0.0.0
-# then visit http://localhost:8080/
-```
-
 ## What's inside
 
 - `index.html` — semantic markup for all sections (header, hero, area filter, services,
