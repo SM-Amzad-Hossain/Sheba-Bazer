@@ -20,6 +20,11 @@ python3 -m http.server 8080 --bind 0.0.0.0
 - `services.html` — ডাক্তার পাওয়া service-detail page: green hero band with breadcrumb,
   stethoscope tile + live count badge, area-filter card (filters the doctor list),
   doctor cards, ad banner carousel, help cards and an অন্যান্য সেবা quick-pick row
+  (doctor cards link to `service.html`)
+- `service.html` — single provider profile page (ডাঃ নমুনা ১): photo block, chips,
+  call/WhatsApp/share actions, সেবাদাতা info card, price list, work-photo placeholders,
+  schedule, working review form (localStorage-backed aggregate) and
+  একই সেবার অন্যান্য সেবাদাতা pills; backed by `js/service.js`
 - `js/components.js` — single source of truth for the shared header, footer, auth modal
   and toast (injected on every page; path-aware links + active nav)
 - `js/services.js` — services-page logic: renders doctor cards, filters them via the

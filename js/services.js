@@ -39,14 +39,14 @@ const countBadge  = $('#docCountBadge');
 
 function renderDoctors(list) {
   doctorGrid.innerHTML = list.map(d => `
-    <article class="doctor-card" data-upazila="${d.upazila}">
+    <a class="doctor-card" href="service.html" data-upazila="${d.upazila}" aria-label="${d.name} — ${d.specialty}, ${d.upazila} — প্রোফাইল দেখুন">
       <div class="doctor-photo" aria-hidden="true">ন</div>
       <div class="doctor-info">
         <h3 class="doctor-name">${d.name}</h3>
         <p class="doctor-specialty">${d.specialty}</p>
         <p class="doctor-location">${PIN}${d.upazila}</p>
       </div>
-    </article>`).join('');
+    </a>`).join('');
   doctorEmpty.hidden = list.length !== 0;
   countBadge.textContent = `${toBn(list.length)} জন পাওয়া গেছে`;
 }
