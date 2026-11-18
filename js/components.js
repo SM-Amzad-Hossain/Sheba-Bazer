@@ -22,7 +22,7 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
     <nav class="desktop-nav" aria-label="প্রধান নেভিগেশন">
       <a href="#home" class="nav-link is-active" data-navspy="home">হোম</a>
       <a href="services.html" class="nav-link" data-navspy="services">সেবাসমূহ</a>
-      <a href="#" class="nav-link" data-blog-link>ব্লগ</a>
+      <a href="blog.html" class="nav-link" data-navspy="blog">ব্লগ</a>
       <a href="#about" class="nav-link" data-navspy="about">আমাদের সম্পর্কে</a>
       <a href="#contact" class="nav-link" data-navspy="contact">যোগাযোগ</a>
     </nav>
@@ -41,7 +41,7 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
     <nav class="container mobile-nav" aria-label="মোবাইল নেভিগেশন">
       <a href="#home" class="mobile-link">হোম</a>
       <a href="services.html" class="mobile-link">সেবাসমূহ</a>
-      <a href="#" class="mobile-link" data-blog-link>ব্লগ</a>
+      <a href="blog.html" class="mobile-link">ব্লগ</a>
       <a href="#about" class="mobile-link">আমাদের সম্পর্কে</a>
       <a href="#contact" class="mobile-link">যোগাযোগ</a>
       <div class="mobile-auth">
@@ -66,7 +66,7 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER ══�
       <h3 class="footer-heading">দ্রুত লিংক</h3>
       <a href="#home" class="footer-link">হোম</a>
       <a href="#services" class="footer-link">সেবাসমূহ</a>
-      <a href="#" class="footer-link" data-blog-link>ব্লগ</a>
+      <a href="blog.html" class="footer-link">ব্লগ</a>
       <a href="#about" class="footer-link">আমাদের সম্পর্কে</a>
       <a href="#contact" class="footer-link">যোগাযোগ</a>
     </nav>
@@ -124,11 +124,13 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER ══�
   var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   var isHome = path === '' || path === 'index.html';
 
-  if (path === 'services.html') {
-    var home = (headerSlot || document).querySelector('[data-navspy="home"]');
-    var svc = (headerSlot || document).querySelector('[data-navspy="services"]');
-    if (home) home.classList.remove('is-active');
-    if (svc) svc.classList.add('is-active');
+  var navSpy = path === 'services.html' ? 'services'
+    : (path === 'blog.html' || path === 'blog-post.html') ? 'blog' : null;
+  if (navSpy) {
+    var home2 = (headerSlot || document).querySelector('[data-navspy="home"]');
+    var target = (headerSlot || document).querySelector('[data-navspy="' + navSpy + '"]');
+    if (home2) home2.classList.remove('is-active');
+    if (target) target.classList.add('is-active');
   }
 
   if (!isHome) {

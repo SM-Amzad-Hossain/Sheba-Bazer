@@ -16,6 +16,11 @@ verified service providers (মিস্ত্রি, ড্রাইভার, 
   call/WhatsApp/share actions, সেবাদাতা info card, price list, work-photo placeholders,
   schedule, working review form (localStorage-backed aggregate) and
   একই সেবার অন্যান্য সেবাদাতা pills; backed by `js/service.js`
+- `blog.html` — সেবা বাজার ব্লগ: green hero band, featured article, live search,
+  category chips (filtered grid), newsletter signup; renders from `js/blog-data.js`
+- `blog-post.html` — single article view (`?slug=`): article with tags/like/share
+  (localStorage-backed like), prev-next pager, related posts, sidebar
+  (categories, recent posts, CTA); backed by `js/blog.js`
 - `js/components.js` — single source of truth for the shared header, footer, auth modal
   and toast (injected on every page; path-aware links + active nav)
 - `js/services.js` — services-page logic: renders doctor cards, filters them via the
