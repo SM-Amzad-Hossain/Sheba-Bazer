@@ -21,7 +21,7 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
 
     <nav class="desktop-nav" aria-label="প্রধান নেভিগেশন">
       <a href="#home" class="nav-link is-active" data-navspy="home">হোম</a>
-      <a href="#services" class="nav-link" data-navspy="services">সেবাসমূহ</a>
+      <a href="services.html" class="nav-link" data-navspy="services">সেবাসমূহ</a>
       <a href="#" class="nav-link" data-blog-link>ব্লগ</a>
       <a href="#about" class="nav-link" data-navspy="about">আমাদের সম্পর্কে</a>
       <a href="#contact" class="nav-link" data-navspy="contact">যোগাযোগ</a>
@@ -40,7 +40,7 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
   <div class="mobile-panel" id="mobilePanel" hidden>
     <nav class="container mobile-nav" aria-label="মোবাইল নেভিগেশন">
       <a href="#home" class="mobile-link">হোম</a>
-      <a href="#services" class="mobile-link">সেবাসমূহ</a>
+      <a href="services.html" class="mobile-link">সেবাসমূহ</a>
       <a href="#" class="mobile-link" data-blog-link>ব্লগ</a>
       <a href="#about" class="mobile-link">আমাদের সম্পর্কে</a>
       <a href="#contact" class="mobile-link">যোগাযোগ</a>
