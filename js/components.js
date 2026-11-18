@@ -24,7 +24,7 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
       <a href="services.html" class="nav-link" data-navspy="services">সেবাসমূহ</a>
       <a href="blog.html" class="nav-link" data-navspy="blog">ব্লগ</a>
       <a href="about.html" class="nav-link" data-navspy="about">আমাদের সম্পর্কে</a>
-      <a href="#contact" class="nav-link" data-navspy="contact">যোগাযোগ</a>
+      <a href="contact.html" class="nav-link" data-navspy="contact">যোগাযোগ</a>
     </nav>
 
     <div class="header-actions">
@@ -43,7 +43,7 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
       <a href="services.html" class="mobile-link">সেবাসমূহ</a>
       <a href="blog.html" class="mobile-link">ব্লগ</a>
       <a href="about.html" class="mobile-link">আমাদের সম্পর্কে</a>
-      <a href="#contact" class="mobile-link">যোগাযোগ</a>
+      <a href="contact.html" class="mobile-link">যোগাযোগ</a>
       <div class="mobile-auth">
         <button class="btn btn-outline" data-auth-open="login">লগইন</button>
         <button class="btn btn-solid" data-auth-open="signup">সাইন আপ</button>
@@ -68,7 +68,7 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER ══�
       <a href="#services" class="footer-link">সেবাসমূহ</a>
       <a href="blog.html" class="footer-link">ব্লগ</a>
       <a href="about.html" class="footer-link">আমাদের সম্পর্কে</a>
-      <a href="#contact" class="footer-link">যোগাযোগ</a>
+      <a href="contact.html" class="footer-link">যোগাযোগ</a>
     </nav>
 
     <div class="footer-col">
@@ -126,7 +126,8 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER ══�
 
   var navSpy = path === 'services.html' ? 'services'
     : (path === 'blog.html' || path === 'blog-post.html') ? 'blog'
-    : path === 'about.html' ? 'about' : null;
+    : path === 'about.html' ? 'about'
+    : path === 'contact.html' ? 'contact' : null;
   if (navSpy) {
     var home2 = (headerSlot || document).querySelector('[data-navspy="home"]');
     var target = (headerSlot || document).querySelector('[data-navspy="' + navSpy + '"]');

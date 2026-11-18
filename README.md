@@ -24,6 +24,10 @@ verified service providers (মিস্ত্রি, ড্রাইভার, 
 - `about.html` — আমাদের সম্পর্কে page (green hero band with diagonal rays,
   our story, mission/provider cards, কীভাবে কাজ করে steps, কেন সেবা বাজার,
   CTA band)
+- `contact.html` — যোগাযোগ page (green hero band, message form with validation +
+  loading state and localStorage outbox, direct call/WhatsApp buttons,
+  address/email/office hours, stylized map tile linking to Google Maps, quick links);
+  backed by `js/contact.js`
 - `js/components.js` — single source of truth for the shared header, footer, auth modal
   and toast (injected on every page; path-aware links + active nav)
 - `js/services.js` — services-page logic: renders doctor cards, filters them via the
