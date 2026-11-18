@@ -1,8 +1,8 @@
 # সেবা বাজার (Sheba Bazer)
 
-A pixel-faithful, fully responsive implementation of the **সেবা বাজার** home page —
-a local-services marketplace where people in Bangladesh book verified service
-providers (মিস্ত্রি, ড্রাইভার, ইলেকট্রিশিয়ান…) from one place.
+A pixel-faithful, fully responsive implementation of the **সেবা বাজার** home page and
+service-detail page — a local-services marketplace where people in Bangladesh book
+verified service providers (মিস্ত্রি, ড্রাইভার, ইলেকট্রিশিয়ান…) from one place.
 
 ## Run it
 
@@ -17,6 +17,13 @@ python3 -m http.server 8080 --bind 0.0.0.0
 
 - `index.html` — semantic markup for all sections (header, hero, area filter, services,
   trusted partners, request form, about, footer, auth modal)
+- `services.html` — ডাক্তার পাওয়া service-detail page: green hero band with breadcrumb,
+  stethoscope tile + live count badge, area-filter card (filters the doctor list),
+  doctor cards, ad banner carousel, help cards and an অন্যান্য সেবা quick-pick row
+- `js/components.js` — single source of truth for the shared header, footer, auth modal
+  and toast (injected on every page; path-aware links + active nav)
+- `js/services.js` — services-page logic: renders doctor cards, filters them via the
+  area-filter card, ad carousel, অন্যান্য সেবা quick-pick
 - `css/styles.css` — design system (self-hosted Hind Siliguri / Baloo Da 2,
   CSS custom properties, responsive breakpoints down to 360px)
 - `js/data-locations.js` — all 8 divisions → 64 districts → upazilas (dependent dropdowns)
