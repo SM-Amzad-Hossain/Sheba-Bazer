@@ -196,10 +196,9 @@ img, svg { display: block; }
 .mobile-auth { display: flex; gap: 12px; margin-top: 12px; }
 .mobile-auth .btn { flex: 1; }
 
-/* ══════════ HERO ══════════ */
+/* ══════════ HERO ══════════
+   Hero paints from the very top of the document, behind the fixed transparent header. */
 .hero {
-  /* hero paints behind the fixed transparent header (74px desktop / 66px mobile) */
-  margin-top: -74px;
   background:
     radial-gradient(1100px 500px at 78% -10%, #ffffff 0%, rgba(255,255,255,0) 55%),
     var(--mint);
@@ -303,7 +302,6 @@ img, svg { display: block; }
 
 /* ══════════ SERVICES ══════════ */
 .services {
-  margin-top: 64px;
   background:
     radial-gradient(1200px 600px at 15% 0%, rgba(255,255,255,.09), transparent 60%),
     radial-gradient(circle at 50% 50%, transparent 0 90%, rgba(0,0,0,.08)),
@@ -703,7 +701,6 @@ img, svg { display: block; }
   .hamburger { display: flex; }
   .header-actions .btn { display: none; }
   .header-inner { height: 66px; }
-  .hero { margin-top: -66px; }
 
   .hero-grid {
     grid-template-columns: 1fr;
