@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>সেবা বাজার | আপনার এলাকার দক্ষ সেবা এক জায়গায়</title>
+  <meta name="description" content="মিস্ত্রি, ড্রাইভার, ইলেকট্রিশিয়ান, এসি মিস্ত্রি, ডাক্তার — আপনার এলাকার যাচাই করা সেবাদাতা এখন এক জায়গায়। ঘরে বসে বুক করুন সেবা বাজারে।" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body id="home">
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="logo" href="#home" aria-label="সেবা বাজার — হোম">
+      <!-- Brand mark: green shopping bag with white "সেবা", orange speed-lines + swoosh -->
+      <svg class="logo-mark" viewBox="0 0 124 148" role="img" aria-label="সেবা বাজার লোগো" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bagGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#17A95B"/>
+            <stop offset=".55" stop-color="#0E8F4C"/>
+            <stop offset="1" stop-color="#0B6E3C"/>
+          </linearGradient>
+        </defs>
+        <!-- orange speed lines -->
+        <g stroke="#F58634" stroke-width="6" stroke-linecap="round">
+          <line x1="4"  y1="52" x2="28" y2="46"/>
+          <line x1="1"  y1="66" x2="26" y2="62"/>
+          <line x1="6"  y1="80" x2="24" y2="78"/>
+        </g>
+        <!-- bag body -->
+        <path d="M30 40 L92 40 L101 96 Q101 104 93 104 L29 104 Q21 104 21 96 Z"
+              fill="url(#bagGrad)" stroke="#0A5B32" stroke-width="7" stroke-linejoin="round"/>
+        <!-- handle -->
+        <path d="M44 40 C44 21 52 12 61 12 C70 12 79 21 79 40"
+              fill="none" stroke="#0A5B32" stroke-width="8" stroke-linecap="round"/>
+        <!-- word inside bag -->
+        <text x="61" y="88" text-anchor="middle" font-family="'Baloo Da 2','Hind Siliguri',sans-serif" font-weight="800" font-size="33" fill="#FFFFFF" stroke="#0A5B32" stroke-width="1.4" stroke-linejoin="round">সেবা</text>
+        <!-- orange swoosh across the bag -->
+        <path d="M24 98 C46 106 82 100 108 72" fill="none" stroke="#F58634" stroke-width="6" stroke-linecap="round"/>
+        <!-- বাজার -->
+        <text x="62" y="132" text-anchor="middle" font-family="'Baloo Da 2','Hind Siliguri',sans-serif" font-weight="800" font-size="33" fill="#0A5B32">বাজার</text>
+        <path d="M22 142 C48 149 80 147 106 128" fill="none" stroke="#F58634" stroke-width="5.5" stroke-linecap="round"/>
+      </svg>
+    </a>
+
+    <nav class="desktop-nav" aria-label="প্রধান নেভিগেশন">
+      <a href="#home" class="nav-link is-active" data-navspy="home">হোম</a>
+      <a href="#services" class="nav-link" data-navspy="services">সেবাসমূহ</a>
+      <a href="#" class="nav-link" data-blog-link>ব্লগ</a>
+      <a href="#about" class="nav-link" data-navspy="about">আমাদের সম্পর্কে</a>
+      <a href="#contact" class="nav-link" data-navspy="contact">যোগাযোগ</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn btn-outline btn-sm" data-auth-open="login">লগইন</button>
+      <button class="btn btn-solid btn-sm" data-auth-open="signup">সাইন আপ</button>
+      <button class="hamburger" id="hamburger" aria-label="মেনু টগল করুন" aria-expanded="false" aria-controls="mobilePanel">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile dropdown panel -->
+  <div class="mobile-panel" id="mobilePanel" hidden>
+    <nav class="container mobile-nav" aria-label="মোবাইল নেভিগেশন">
+      <a href="#home" class="mobile-link">হোম</a>
+      <a href="#services" class="mobile-link">সেবাসমূহ</a>
+      <a href="#" class="mobile-link" data-blog-link>ব্লগ</a>
+      <a href="#about" class="mobile-link">আমাদের সম্পর্কে</a>
+      <a href="#contact" class="mobile-link">যোগাযোগ</a>
+      <div class="mobile-auth">
+        <button class="btn btn-outline" data-auth-open="login">লগইন</button>
+        <button class="btn btn-solid" data-auth-open="signup">সাইন আপ</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" aria-label="সেবা বাজার — হিরো">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="hero-badge" id="heroBadge">বিশ্বস্ত স্থানীয় সেবা</span>
+      <h1 class="hero-title" id="heroTitle">আপনার দরজায় <span>দক্ষ সেবা</span></h1>
+      <p class="hero-sub" id="heroSub">মিস্ত্রি, ড্রাইভার, ইলেকট্রিশিয়ান, সবাই এক জায়গায়।</p>
+      <button class="btn btn-hero" id="heroCta">
+        <span id="heroCtaText">সেবা খুঁজুন</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <div class="hero-dots" id="heroDots" role="tablist" aria-label="হিরো স্লাইড"></div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <!-- Flat "Lalbagh Fort" style waterfront illustration -->
+      <svg class="fort-scene" viewBox="0 0 660 430" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".95"/>
+            <stop offset="60%" stop-color="#FFFFFF" stop-opacity=".45"/>
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="fortWall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F2D9A0"/>
+            <stop offset="1" stop-color="#E3BC76"/>
+          </linearGradient>
+          <linearGradient id="fortTower" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F6E3B4"/>
+            <stop offset="1" stop-color="#D9B36A"/>
+          </linearGradient>
+          <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#DFF3E7"/>
+            <stop offset="1" stop-color="#C2E8D2"/>
+          </linearGradient>
+          <linearGradient id="hullGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#D95F33"/>
+            <stop offset="1" stop-color="#B2451F"/>
+          </linearGradient>
+        </defs>
+
+        <!-- sun -->
+        <circle cx="520" cy="72" r="78" fill="url(#sunGlow)"/>
+        <circle cx="520" cy="72" r="34" fill="#FFFDF4"/>
+
+        <!-- far hills -->
+        <path d="M0 210 Q70 148 150 196 T320 178 T520 190 T660 178 V300 H0 Z" fill="#C9E8D6"/>
+        <!-- mid hills -->
+        <path d="M0 240 Q110 178 210 226 T430 214 T660 236 V320 H0 Z" fill="#A9DCC0"/>
+        <!-- near shore band -->
+        <path d="M0 292 Q160 262 330 286 T660 284 V330 H0 Z" fill="#8FD0AC"/>
+
+        <!-- water -->
+        <rect x="0" y="318" width="660" height="112" fill="url(#waterGrad)"/>
+
+        <!-- white buildings, right bank -->
+        <g fill="#FFFFFF" stroke="#DDEFE4" stroke-width="2">
+          <rect x="512" y="252" width="26" height="58" rx="2"/>
+          <rect x="544" y="268" width="17" height="42" rx="2"/>
+          <rect x="566" y="242" width="24" height="68" rx="2"/>
+          <rect x="596" y="262" width="18" height="48" rx="2"/>
+        </g>
+
+        <!-- fort reflection -->
+        <g opacity=".28" transform="translate(0 636) scale(1 -1)">
+          <rect x="262" y="176" width="180" height="128" fill="#D9B36A"/>
+          <rect x="238" y="150" width="40" height="154" rx="8" fill="#E3BC76"/>
+          <rect x="426" y="150" width="40" height="154" rx="8" fill="#E3BC76"/>
+        </g>
+
+        <!-- ════ LALBAGH-STYLE FORT ════ -->
+        <g>
+          <!-- main wall -->
+          <rect x="262" y="176" width="180" height="128" fill="url(#fortWall)" stroke="#C8A25C" stroke-width="2.5"/>
+          <!-- crenellations -->
+          <g fill="#F6E3B4" stroke="#C8A25C" stroke-width="2">
+            <rect x="266" y="163" width="18" height="16" rx="3"/><rect x="300" y="163" width="18" height="16" rx="3"/><rect x="334" y="163" width="18" height="16" rx="3"/><rect x="368" y="163" width="18" height="16" rx="3"/><rect x="402" y="163" width="18" height="16" rx="3"/>
+          </g>
+          <!-- blind arches on the wall -->
+          <g fill="#C8A25C" opacity=".85">
+            <rect x="288" y="238" width="12" height="22" rx="6"/><rect x="318" y="238" width="12" height="22" rx="6"/><rect x="348" y="238" width="12" height="22" rx="6"/><rect x="378" y="238" width="12" height="22" rx="6"/><rect x="408" y="238" width="12" height="22" rx="6"/>
+          </g>
+          <!-- central arched gateway -->
+          <path d="M336 304 V262 a16 18 0 0 1 32 0 V304 Z" fill="#7A5A30"/>
+          <path d="M342 304 V264 a10 12 0 0 1 20 0 V304 Z" fill="#5C4222"/>
+          <!-- left tower -->
+          <rect x="238" y="150" width="40" height="154" rx="7" fill="url(#fortTower)" stroke="#C8A25C" stroke-width="2.5"/>
+          <circle cx="258" cy="146" r="17" fill="#F6E3B4" stroke="#C8A25C" stroke-width="2.5"/>
+          <!-- right tower -->
+          <rect x="426" y="150" width="40" height="154" rx="7" fill="url(#fortTower)" stroke="#C8A25C" stroke-width="2.5"/>
+          <circle cx="446" cy="146" r="17" fill="#F6E3B4" stroke="#C8A25C" stroke-width="2.5"/>
+          <!-- tower slits -->
+          <rect x="253" y="206" width="9" height="18" rx="4.5" fill="#C8A25C"/>
+          <rect x="441" y="206" width="9" height="18" rx="4.5" fill="#C8A25C"/>
+        </g>
+
+        <!-- palm silhouettes -->
+        <g fill="#17693E">
+          <path d="M196 304 C192 262 196 236 204 216 C207 208 214 208 216 216 C221 238 220 268 218 304 Z"/>
+          <path d="M210 218 C190 206 168 208 152 224 C172 224 190 228 206 236 Z"/>
+          <path d="M210 214 C224 194 246 190 266 200 C244 204 226 214 212 230 Z"/>
+          <path d="M209 212 C206 188 216 168 234 156 C228 178 224 196 222 214 Z"/>
+          <path d="M207 214 C186 202 170 206 158 218 C178 216 196 222 210 230 Z" opacity=".9"/>
+          <path d="M486 306 C482 268 486 244 494 224 C497 216 504 216 506 224 C511 246 510 276 508 306 Z"/>
+          <path d="M500 226 C482 214 462 216 448 230 C466 231 482 236 497 244 Z"/>
+          <path d="M500 222 C514 204 534 200 552 210 C532 215 516 224 503 238 Z"/>
+          <path d="M499 220 C497 198 506 180 522 169 C517 189 513 207 511 223 Z"/>
+        </g>
+
+        <!-- boats on the water -->
+        <g>
+          <path d="M118 352 Q150 366 190 352 L178 342 Q150 350 130 342 Z" fill="url(#hullGrad)"/>
+          <rect x="142" y="330" width="26" height="10" rx="5" fill="#E8C87E" stroke="#B2451F" stroke-width="1.6"/>
+        </g>
+        <g>
+          <path d="M480 386 Q508 398 546 386 L534 376 Q508 384 492 376 Z" fill="url(#hullGrad)"/>
+          <rect x="500" y="364" width="24" height="11" rx="5" fill="#FFFFFF" stroke="#D8B56E" stroke-width="1.6"/>
+        </g>
+
+        <!-- water shimmer lines -->
+        <g stroke="#FFFFFF" stroke-linecap="round" opacity=".85">
+          <line x1="60"  y1="338" x2="150" y2="338" stroke-width="4"/>
+          <line x1="230" y1="352" x2="330" y2="352" stroke-width="4"/>
+          <line x1="120" y1="386" x2="250" y2="386" stroke-width="5"/>
+          <line x1="380" y1="366" x2="470" y2="366" stroke-width="4"/>
+          <line x1="300" y1="404" x2="430" y2="404" stroke-width="4"/>
+          <line x1="560" y1="348" x2="636" y2="348" stroke-width="4"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ AREA FILTER CARD (overlaps hero) ══════════ -->
+<div class="container area-card-wrap" id="area">
+  <form class="area-card" id="areaFilterForm" novalidate>
+    <h2 class="area-card-title">আগে আপনার <span>এলাকা নির্ধারণ</span> করুন</h2>
+    <div class="area-grid">
+      <label class="select-wrap">
+        <span class="sr-only">বিভাগ বেছে নিন</span>
+        <select id="areaDivision" class="select-input" required><option value="">বিভাগ</option></select>
+        <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </label>
+      <label class="select-wrap">
+        <span class="sr-only">জেলা বেছে নিন</span>
+        <select id="areaDistrict" class="select-input" required disabled><option value="">জেলা</option></select>
+        <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </label>
+      <label class="select-wrap">
+        <span class="sr-only">উপজেলা বেছে নিন</span>
+        <select id="areaUpazila" class="select-input" required disabled><option value="">উপজেলা</option></select>
+        <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </label>
+      <label class="select-wrap">
+        <span class="sr-only">সেবা বেছে নিন</span>
+        <select id="areaService" class="select-input" required><option value="">সেবা</option></select>
+        <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </label>
+    </div>
+    <button type="submit" class="btn btn-solid area-card-btn">সেবা খুঁজুন</button>
+  </form>
+</div>
+
+<!-- ══════════ SERVICES ══════════ -->
+<section class="services" id="services" aria-label="সেবার ক্যাটাগরি">
+  <div class="container">
+    <h2 class="section-title section-title--light">বেছে নিন আপনার প্রয়োজনীয় সেবা</h2>
+    <p class="section-sub section-sub--light">যে সেবাটি দরকার, সেটিতে ক্লিক করুন।</p>
+
+    <div class="services-grid" id="servicesGrid" role="list"></div>
+
+    <!-- Ad banner carousel -->
+    <div class="ad-panel" aria-roledescription="carousel" aria-label="বিজ্ঞাপন">
+      <button class="ad-arrow ad-arrow--prev" id="adPrev" aria-label="আগের বিজ্ঞাপন">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <div class="ad-viewport">
+        <div class="ad-track" id="adTrack"></div>
+      </div>
+      <button class="ad-arrow ad-arrow--next" id="adNext" aria-label="পরের বিজ্ঞাপন">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div class="ad-dots" id="adDots" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ══════════ TRUSTED PARTNERS ══════════ -->
+<section class="partners" aria-label="দক্ষ সেবা প্রদানকারি প্রতিষ্ঠান">
+  <div class="container">
+    <h2 class="section-title section-title--dark">দক্ষ সেবা প্রদানকারি প্রতিষ্ঠান</h2>
+    <div class="partners-row" id="partnersRow"></div>
+  </div>
+</section>
+
+<!-- ══════════ REQUEST FORM ══════════ -->
+<section class="request-section" id="request" aria-label="সেবার অনুরোধ">
+  <div class="container container--narrow">
+    <div class="request-card" id="requestCard">
+      <h2 class="request-title">আপনার প্রয়োজনীয় সেবা খুঁজুন</h2>
+
+      <!-- search with live suggestions -->
+      <div class="search-row">
+        <div class="search-box" id="searchBox">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="serviceSearch" class="search-input" placeholder="যেমন: ইলেকট্রিশিয়ান, এসি মিস্ত্রি..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="suggestList" aria-autocomplete="list" />
+          <ul class="suggest-list" id="suggestList" role="listbox" aria-label="মিলে যাওয়া সেবা"></ul>
+        </div>
+        <button class="btn btn-solid search-btn" id="searchBtn">খুঁজুন</button>
+      </div>
+
+      <div class="or-divider" aria-hidden="true"><span>অথবা সেবার অনুরোধ জানান</span></div>
+
+      <!-- tabs -->
+      <div class="tab-row" role="tablist" aria-label="অনুরোধের ধরন">
+        <button class="tab-btn is-active" id="tabTake" role="tab" aria-selected="true" aria-controls="requestForm">সেবা নিতে চাই</button>
+        <button class="tab-btn" id="tabGive" role="tab" aria-selected="false" aria-controls="requestForm">সেবা দিতে চাই</button>
+      </div>
+
+      <form id="requestForm" class="request-form" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label class="field-label" for="fName">আপনার নাম <i>*</i></label>
+            <input type="text" id="fName" class="field-input" placeholder="নাম লিখুন" autocomplete="name" required />
+            <p class="field-error">অনুগ্রহ করে আপনার নাম লিখুন।</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="fPhone">মোবাইল নম্বর <i>*</i></label>
+            <input type="tel" id="fPhone" class="field-input" placeholder="01XXXXXXXXX" inputmode="numeric" maxlength="11" autocomplete="tel" required />
+            <p class="field-error">সঠিক ১১-সংখ্যার মোবাইল নম্বর দিন (যেমন 017XXXXXXXX)।</p>
+          </div>
+          <div class="field field--full">
+            <label class="field-label" for="fService" id="fServiceLabel">কোন সেবা দরকার <i>*</i></label>
+            <label class="select-wrap select-wrap--field">
+              <select id="fService" class="field-input select-input" required>
+                <option value="">-- বাছাই করুন --</option>
+              </select>
+              <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </label>
+            <p class="field-error">একটি সেবা বেছে নিন।</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="fDivision">বিভাগ <i>*</i></label>
+            <label class="select-wrap select-wrap--field">
+              <select id="fDivision" class="field-input select-input" required><option value="">-- বিভাগ --</option></select>
+              <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </label>
+            <p class="field-error">বিভাগ বেছে নিন।</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="fDistrict">জেলা <i>*</i></label>
+            <label class="select-wrap select-wrap--field">
+              <select id="fDistrict" class="field-input select-input" required disabled><option value="">-- জেলা --</option></select>
+              <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </label>
+            <p class="field-error">জেলা বেছে নিন।</p>
+          </div>
+          <div class="field field--full">
+            <label class="field-label" for="fUpazila">উপজেলা <i>*</i></label>
+            <label class="select-wrap select-wrap--field">
+              <select id="fUpazila" class="field-input select-input" required disabled><option value="">-- উপজেলা --</option></select>
+              <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </label>
+            <p class="field-error">উপজেলা বেছে নিন।</p>
+          </div>
+          <div class="field field--full">
+            <label class="field-label" for="fDetails">কাজের বিবরণ</label>
+            <textarea id="fDetails" class="field-input field-textarea" placeholder="সংক্ষেপে লিখুন" rows="3"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-solid request-submit" id="submitBtn">সেবার অনুরোধ পাঠান</button>
+      </form>
+
+      <!-- success state -->
+      <div class="request-success" id="requestSuccess" hidden>
+        <div class="success-icon" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h3>অনুরোধ পাঠানো হয়েছে!</h3>
+        <p>আমরা শীঘ্রই আপনার মোবাইলে যোগাযোগ করব। আপনার ধৈর্যের জন্য ধন্যবাদ।</p>
+        <button class="btn btn-outline" id="successReset">আরেকটি অনুরোধ পাঠান</button>
+      </div>
+
+      <!-- provider CTA -->
+      <div class="provider-box">
+        <p class="provider-title">আপনি কি সেবাদাতা?</p>
+        <p class="provider-sub">নিবন্ধন করে নতুন কাজে পান</p>
+        <button class="btn btn-outline" id="providerRegisterBtn">সেবাদাতা হিসেবে নিবন্ধন করুন</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section class="about" id="about" aria-label="আমাদের সম্পর্কে">
+  <div class="container">
+    <h2 class="about-title">আমাদের সম্পর্কে</h2>
+    <p class="about-text"><strong>সেবা বাজার</strong> একটি স্থানীয় সেবা খোঁজার প্ল্যাটফর্ম। আমাদের লক্ষ্য খুব সহজ: দক্ষ কর্মী আর সেবা প্রয়োজন এমন মানুষকে এক জায়গায় আনা। এতে সেবা নিতে যেমন আর পাড়ায় পাড়ায় ঘুরতে হয় না, আর সেবাদাতাও নতুন কাজ পান।</p>
+
+    <div class="features-grid" id="featuresGrid"></div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <p class="stat-number"><span data-counter="500" data-suffix="+">০</span></p>
+        <p class="stat-label">নিবন্ধিত সেবাদাতা</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number"><span data-counter="8" data-suffix="টি">০</span></p>
+        <p class="stat-label">সেবার ক্যাটাগরি</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number"><span data-counter="2000" data-suffix="+">০</span></p>
+        <p class="stat-label">সন্তুষ্ট গ্রাহক</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="site-footer" id="contact">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="logo logo--footer" href="#home" aria-label="সেবা বাজার">
+        <svg class="logo-mark" viewBox="0 2 124 108" role="img" aria-label="সেবা বাজার লোগো" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bagGradFooter" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#17A95B"/><stop offset=".55" stop-color="#0E8F4C"/><stop offset="1" stop-color="#0B6E3C"/>
+            </linearGradient>
+          </defs>
+          <g stroke="#F58634" stroke-width="6" stroke-linecap="round">
+            <line x1="4"  y1="52" x2="28" y2="46"/><line x1="1"  y1="66" x2="26" y2="62"/><line x1="6"  y1="80" x2="24" y2="78"/>
+          </g>
+          <path d="M30 40 L92 40 L101 96 Q101 104 93 104 L29 104 Q21 104 21 96 Z" fill="url(#bagGradFooter)" stroke="#0A5B32" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M44 40 C44 21 52 12 61 12 C70 12 79 21 79 40" fill="none" stroke="#0A5B32" stroke-width="8" stroke-linecap="round"/>
+          <text x="61" y="88" text-anchor="middle" font-family="'Baloo Da 2','Hind Siliguri',sans-serif" font-weight="800" font-size="33" fill="#FFFFFF" stroke="#0A5B32" stroke-width="1.4" stroke-linejoin="round">সেবা</text>
+          <path d="M24 98 C46 106 82 100 108 72" fill="none" stroke="#F58634" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <span class="footer-brand-text">সেবা বাজার</span>
+      </a>
+      <p class="footer-tagline">আপনার এলাকার দক্ষ সেবাদাতা এক জায়গায়।</p>
+    </div>
+
+    <nav class="footer-col" aria-label="দ্রুত লিংক">
+      <h3 class="footer-heading">দ্রুত লিংক</h3>
+      <a href="#home" class="footer-link">হোম</a>
+      <a href="#services" class="footer-link">সেবাসমূহ</a>
+      <a href="#" class="footer-link" data-blog-link>ব্লগ</a>
+      <a href="#about" class="footer-link">আমাদের সম্পর্কে</a>
+      <a href="#contact" class="footer-link">যোগাযোগ</a>
+    </nav>
+
+    <div class="footer-col">
+      <h3 class="footer-heading">যোগাযোগ</h3>
+      <p class="footer-contact"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> ঠিকানা: সাতক্ষীরা, খুলনা বিভাগ, বাংলাদেশ</p>
+      <p class="footer-contact"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l3.27-1.27a2 2 0 0 1 2.11.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> মোবাইল: ০১XXX-XXXXXX</p>
+      <p class="footer-contact"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg> ইমেইল: info@example.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container"><p>© <span id="footerYear">২০২৬</span> সেবা বাজার। সর্বস্বত্ব সংরক্ষিত।</p></div>
+  </div>
+</footer>
+
+<!-- ══════════ AUTH MODAL ══════════ -->
+<div class="auth-overlay" id="authOverlay" hidden>
+  <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="auth-close" id="authClose" aria-label="বন্ধ করুন">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="auth-logo">
+      <svg class="logo-mark logo-mark--sm" viewBox="0 2 124 108" role="img" aria-label="সেবা বাজার লোগো" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#F58634" stroke-width="7" stroke-linecap="round">
+          <line x1="4"  y1="52" x2="28" y2="46"/><line x1="1"  y1="66" x2="26" y2="62"/><line x1="6"  y1="80" x2="24" y2="78"/>
+        </g>
+        <path d="M30 40 L92 40 L101 96 Q101 104 93 104 L29 104 Q21 104 21 96 Z" fill="#0E8F4C" stroke="#0A5B32" stroke-width="8" stroke-linejoin="round"/>
+        <path d="M44 40 C44 21 52 12 61 12 C70 12 79 21 79 40" fill="none" stroke="#0A5B32" stroke-width="9" stroke-linecap="round"/>
+        <text x="61" y="88" text-anchor="middle" font-family="'Baloo Da 2','Hind Siliguri',sans-serif" font-weight="800" font-size="33" fill="#FFFFFF">সেবা</text>
+        <path d="M24 98 C46 106 82 100 108 72" fill="none" stroke="#F58634" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h2 class="auth-title" id="authTitle">লগইন করুন</h2>
+    <p class="auth-sub" id="authSub">আপনার মোবাইল নম্বর দিয়ে সহজেই লগইন করুন</p>
+    <form id="authForm" class="auth-form" novalidate>
+      <div class="field auth-name-field" id="authNameField" hidden>
+        <label class="field-label" for="authName">আপনার নাম <i>*</i></label>
+        <input type="text" id="authName" class="field-input" placeholder="নাম লিখুন" autocomplete="name" />
+        <p class="field-error">অনুগ্রহ করে আপনার নাম লিখুন।</p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="authPhone">মোবাইল নম্বর <i>*</i></label>
+        <input type="tel" id="authPhone" class="field-input" placeholder="01XXXXXXXXX" inputmode="numeric" maxlength="11" autocomplete="tel" required />
+        <p class="field-error">সঠিক ১১-সংখ্যার মোবাইল নম্বর দিন।</p>
+      </div>
+      <button type="submit" class="btn btn-solid auth-submit" id="authSubmit">লগইন</button>
+    </form>
+    <p class="auth-switch"><span id="authSwitchText">নতুন অ্যাকাউন্ট চান?</span> <button class="auth-switch-btn" id="authSwitchBtn">সাইন আপ করুন</button></p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/data-locations.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
