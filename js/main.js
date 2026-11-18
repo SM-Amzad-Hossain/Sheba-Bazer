@@ -115,11 +115,13 @@ const mobilePanel = $('#mobilePanel');
 function closeMobileMenu() {
   mobilePanel.hidden = true;
   hamburger.setAttribute('aria-expanded', 'false');
+  header.classList.remove('menu-open');
 }
 hamburger.addEventListener('click', () => {
   const expanded = hamburger.getAttribute('aria-expanded') === 'true';
   hamburger.setAttribute('aria-expanded', String(!expanded));
   mobilePanel.hidden = expanded;
+  header.classList.toggle('menu-open', !expanded);
 });
 $$('.mobile-link', mobilePanel).forEach(a => a.addEventListener('click', closeMobileMenu));
 document.addEventListener('click', (e) => {
