@@ -637,39 +637,6 @@ img, svg { display: block; }
 .footer-legal-link { color: #d3ecdd; text-decoration: none; }
 .footer-legal-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 
-/* ══════════ AUTH MODAL ══════════ */
-.auth-overlay {
-  position: fixed; inset: 0; z-index: 200;
-  background: rgba(6, 32, 19, 0.6);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-  display: grid; place-items: center; padding: 20px;
-  animation: fadeIn .25s ease;
-}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.auth-modal {
-  position: relative; width: min(430px, 100%);
-  background: #fff; border-radius: var(--radius-lg);
-  box-shadow: 0 30px 80px rgba(0,0,0,.35);
-  padding: 34px 30px 26px; text-align: center;
-  animation: modalIn .35s cubic-bezier(.2,1.4,.4,1);
-}
-@keyframes modalIn { from { opacity: 0; transform: translateY(30px) scale(.94); } to { opacity: 1; transform: none; } }
-.auth-close {
-  position: absolute; top: 14px; right: 14px;
-  width: 38px; height: 38px; border-radius: 10px;
-  display: grid; place-items: center; color: var(--ink-soft);
-  background: var(--mint-soft); transition: background .15s ease;
-}
-.auth-close:hover { background: #dcefe4; }
-.auth-logo { display: flex; justify-content: center; margin-bottom: 6px; }
-.logo-mark--sm { width: 104px; }
-.auth-title { font-family: var(--font-display); color: var(--headline); font-size: 1.5rem; font-weight: 800; }
-.auth-sub { color: var(--ink-soft); font-size: .92rem; margin-top: 4px; }
-.auth-form { margin-top: 18px; text-align: left; display: flex; flex-direction: column; gap: 12px; }
-.auth-submit { width: 100%; height: 50px; border-radius: var(--radius-sm); }
-.auth-switch { margin-top: 16px; font-size: .9rem; color: var(--ink-soft); }
-.auth-switch-btn { color: var(--green-700); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-
 /* ══════════ TOAST ══════════ */
 .toast {
   position: fixed; bottom: 28px; left: 50%;
@@ -1773,6 +1740,10 @@ img, svg { display: block; }
   background: #fef9e7; border: 1px solid #fde68a; border-radius: 10px; padding: 9px 12px;
 }
 a.portal-save { display: flex; justify-content: center; margin-top: 10px; text-decoration: none; }
+
+/* profile editor: provider area cascade — proper vertical rhythm between the selects */
+#profileProviderFields { display: flex; flex-direction: column; gap: 10px; margin: 0 0 14px; }
+#profileProviderFields[hidden] { display: none; }
 
 .portal-availability { margin: 4px 0 14px; }
 .portal-switch-row {

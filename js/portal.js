@@ -4,8 +4,9 @@
  * accounts live in localStorage (shebaBazarAccounts), session in shebaBazarSession.
  * NOTE: password hashing here is demo-grade obfuscation (cyrb53), NOT security —
  * replace with a real backend before storing real user credentials.
- * Depends on main.js (window.shebaToast / window.shebaServices) and data-locations.js
- * (window.BANGLADESH_LOCATIONS).
+ * Depends on main.js (window.shebaToast / window.shebaServices), data-locations.js
+ * (window.BANGLADESH_LOCATIONS) and accounts.js (window.shebaAccounts — the shared
+ * account/session store, localStorage shebaBazarAccounts / shebaBazarSession).
  */
 'use strict';
 
@@ -17,50 +18,16 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 const BN_DIGITS = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
 const toBn = (n) => String(n).split('').map((d) => BN_DIGITS[+d] ?? d).join('');
 const toast = (msg, type) => (window.shebaToast ? window.shebaToast(msg, type) : undefined);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
-const ACCOUNTS_KEY = 'shebaBazarAccounts';
-const SESSION_KEY  = 'shebaBazarSession';
-const REQUESTS_KEY = 'shebaBazarRequests';
+const ACCOUNTS = window.shebaAccounts;
+const {
+  readAccounts, writeAccounts, readRequests, hashPass, newId,
+  getSession, setSession, getAccount,
+} = ACCOUNTS;
+
 const LOCATIONS    = window.BANGLADESH_LOCATIONS || [];
 const PHONE_RE     = /^01[3-9]\d{8}$/;
-
-/* ── storage helpers ── */
-const readAccounts = () => { try { return JSON.parse(localStorage.getItem(ACCOUNTS_KEY) || '[]'); } catch { return []; } };
-const writeAccounts = (list) => { try { localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(list)); } catch { toast('সংরক্ষণ করা যায়নি — ব্রাউজার স্টোরেজ বন্ধ থাকতে পারে।', 'error'); } };
-const readRequests = () => { try { return JSON.parse(localStorage.getItem(REQUESTS_KEY) || '[]'); } catch { return []; } };
-
-/* demo-grade password hash (obfuscation only) */
-function hashPass(str) {
-  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
-  for (let i = 0; i < str.length; i++) {
-    const ch = str.charCodeAt(i);
-    h1 = Math.imul(h1 ^ ch, 2654435761);
-    h2 = Math.imul(h2 ^ ch, 1597334677);
-  }
-  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-  return (h2 >>> 0).toString(16) + (h1 >>> 0).toString(16);
-}
-
-const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-const getSession = () => { try { return localStorage.getItem(SESSION_KEY); } catch { return null; } };
-const setSession = (id) => { try { id ? localStorage.setItem(SESSION_KEY, id) : localStorage.removeItem(SESSION_KEY); } catch { /* non-fatal */ } };
-const getAccount = (id) => readAccounts().find((a) => a.id === id) || null;
-
-/* ── seed demo accounts on first run ── */
-function seedDemoAccounts() {
-  const accounts = readAccounts();
-  if (accounts.length) return;
-  const now = new Date(Date.now() - 86400000 * 45).toISOString();
-  writeAccounts([
-    { id: newId(), name: 'নুসরাত জাহান', phone: '01700000001', passHash: hashPass('demo123'),
-      role: 'customer', service: '', division: '', district: '', upazila: '', address: '',
-      available: true, views: 0, createdAt: now },
-    { id: newId(), name: 'মোঃ রফিকুল ইসলাম', phone: '01700000002', passHash: hashPass('demo123'),
-      role: 'provider', service: 'কারেন্ট মিস্ত্রি', division: 'খুলনা', district: 'সাতক্ষীরা', upazila: 'সাতক্ষীরা সদর',
-      address: 'সাতক্ষীরা সদর বাসস্ট্যান্ড, সাতক্ষীরা', available: true, views: 128, createdAt: now },
-  ]);
-}
 
 /* ── select fill + division cascade (shared by signup & profile) ── */
 function fillSelect(select, items, placeholder, keep = true) {
@@ -228,7 +195,10 @@ panelSignup.addEventListener('submit', (e) => {
     address: '', available: true, views: 0, createdAt: new Date().toISOString(),
   };
   accounts.push(account);
-  writeAccounts(accounts);
+  if (!writeAccounts(accounts)) {
+    toast('সংরক্ষণ করা যায়নি — ব্রাউজার স্টোরেজ বন্ধ থাকতে পারে।', 'error');
+    return;
+  }
   setSession(account.id);
   toast('অ্যাকাউন্ট তৈরি হয়েছে — স্বাগতম, ' + name + '!');
   panelSignup.reset();
@@ -317,12 +287,12 @@ function renderList(account) {
   portalRequestList.innerHTML = list.map((r) => `
     <article class="portal-request">
       <div class="portal-request-head">
-        <span class="blog-tag">${r.service || 'সেবা'}</span>
+        <span class="blog-tag">${esc(r.service || 'সেবা')}</span>
         <span class="portal-request-status">${account.role === 'provider' ? 'নতুন লিড' : 'অপেক্ষমাণ'}</span>
       </div>
-      <p class="portal-request-details">${r.details ? r.details : '(বিবরণ নেই)'}</p>
+      <p class="portal-request-details">${r.details ? esc(r.details) : '(বিবরণ নেই)'}</p>
       <div class="portal-request-meta">
-        <span>${r.location || ''}</span>
+        <span>${esc(r.location || '')}</span>
         ${r.submittedAt ? `<span class="blog-dot" aria-hidden="true">·</span><span>${bnDate(r.submittedAt)}</span>` : ''}
       </div>
     </article>`).join('');
@@ -390,6 +360,7 @@ function renderDashboard(id) {
     profileService.value = account.service || '';
     profileAvailable.checked = account.available !== false;
     profileCascade.set(account.division, account.district, account.upazila);
+    portalViewProfileBtn.href = `service.html?id=${encodeURIComponent(account.id)}`;
   }
   return true;
 }
@@ -401,10 +372,10 @@ function showDashboard(id) {
   }
   window.scrollTo(0, 0);
 }
-function showGateway() {
+function showGateway(forceLogin = false) {
   dashboard.hidden = true;
   gateway.hidden = false;
-  if (location.hash === '#signup') openTab('signup', false);
+  if (!forceLogin && location.hash === '#signup') openTab('signup', false);
   else openTab('login', false);
 }
 
@@ -432,7 +403,10 @@ profileForm.addEventListener('submit', (e) => {
     account.upazila  = $('#profileUpazila').value;
     account.available = profileAvailable.checked;
   }
-  writeAccounts(accounts);
+  if (!writeAccounts(accounts)) {
+    toast('সংরক্ষণ করা যায়নি — ব্রাউজার স্টোরেজ বন্ধ থাকতে পারে।', 'error');
+    return;
+  }
   toast('প্রোফাইল সংরক্ষিত হয়েছে!');
   renderDashboard(account.id);
 });
@@ -441,11 +415,12 @@ profileName.addEventListener('input', () => setFieldState(profileName, false));
 $('#portalLogoutBtn').addEventListener('click', () => {
   setSession(null);
   toast('লগআউট করা হয়েছে।');
-  showGateway();
+  /* drop the lingering #signup hash so the login tab shows and stays */
+  history.replaceState(null, '', location.pathname);
+  showGateway(true);
 });
 
-/* ── boot ── */
-seedDemoAccounts();
+/* ── boot (demo accounts are seeded by accounts.js) ── */
 const existing = getSession();
 if (existing && renderDashboard(existing)) {
   /* already logged in */

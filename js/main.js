@@ -2,7 +2,7 @@
  * সেবা বাজার — Sheba Bazer · App logic
  * Navigation · hero carousel · dependent location dropdowns ·
  * services grid · ad carousel · service search with suggestions ·
- * request form (take/give tabs) · counters · auth modal · toast
+ * request form (take/give tabs) · counters · toast
  */
 'use strict';
 
@@ -638,60 +638,6 @@ setTimeout(() => revealTargets.forEach(el => el.classList.add('is-visible')), 90
 /* ────────────────────────────────────────────────
    AUTH MODAL
    ──────────────────────────────────────────────── */
-const authOverlay = $('#authOverlay');
-const authTitle = $('#authTitle'), authSub = $('#authSub'), authSubmit = $('#authSubmit');
-const authNameField = $('#authNameField'), authName = $('#authName'), authPhone = $('#authPhone');
-const authSwitchText = $('#authSwitchText'), authSwitchBtn = $('#authSwitchBtn');
-const authForm = $('#authForm');
-let authMode = 'login';
-let lastFocused = null;
-
-function setAuthMode(mode) {
-  authMode = mode;
-  const isSignup = mode === 'signup';
-  authTitle.textContent = isSignup ? 'সাইন আপ করুন' : 'লগইন করুন';
-  authSub.textContent = isSignup ? 'মিনিট খানেকেই নতুন অ্যাকাউন্ট খুলে ফেলুন' : 'আপনার মোবাইল নম্বর দিয়ে সহজেই লগইন করুন';
-  authSubmit.textContent = isSignup ? 'অ্যাকাউন্ট খুলুন' : 'লগইন';
-  authSwitchText.textContent = isSignup ? 'আগে থেকেই অ্যাকাউন্ট আছে?' : 'নতুন অ্যাকাউন্ট চান?';
-  authSwitchBtn.textContent = isSignup ? 'লগইন করুন' : 'সাইন আপ করুন';
-  authNameField.hidden = !isSignup;
-  authName.required = isSignup;
-}
-function openAuth(mode) {
-  lastFocused = document.activeElement;
-  setAuthMode(mode);
-  authOverlay.hidden = false;
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => authPhone.focus(), 60);
-}
-function closeAuth() {
-  authOverlay.hidden = true;
-  document.body.style.overflow = '';
-  if (lastFocused) lastFocused.focus();
-}
-$$('[data-auth-open]').forEach(btn => btn.addEventListener('click', () => { closeMobileMenu(); openAuth(btn.dataset.authOpen); }));
-$('#authClose').addEventListener('click', closeAuth);
-authOverlay.addEventListener('click', (e) => { if (e.target === authOverlay) closeAuth(); });
-authSwitchBtn.addEventListener('click', () => setAuthMode(authMode === 'login' ? 'signup' : 'login'));
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !authOverlay.hidden) closeAuth(); });
-
-authForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  let ok = true;
-  ok = setFieldError(authPhone, !validatePhone(authPhone.value)) && ok;
-  if (authMode === 'signup') ok = setFieldError(authName, authName.value.trim().length < 2) && ok;
-  if (!ok) { showToast('সঠিক তথ্য দিয়ে আবার চেষ্টা করুন।', 'error'); return; }
-  try {
-    localStorage.setItem('shebaBazarUser', JSON.stringify({
-      mode: authMode, name: authName.value.trim() || 'ব্যবহারকারী', phone: authPhone.value.trim()
-    }));
-  } catch { /* non-fatal */ }
-  closeAuth();
-  showToast(authMode === 'login' ? 'লগইন সফল! আবার স্বাগতম।' : 'সাইন আপ সম্পন্ন! সেবা বাজারে স্বাগতম।');
-  authForm.reset();
-});
-$$('.field-input', authForm).forEach(el => el.addEventListener('input', () => el.closest('.field')?.classList.remove('has-error')));
-
 /* shared data for the services page (single source of truth) */
 window.shebaServices = SERVICES;
 window.shebaAdSlides = AD_SLIDES;

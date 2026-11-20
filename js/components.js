@@ -1,6 +1,6 @@
 /**
  * সেবা বাজার — Shared layout components.
- * THE single source of truth for the site header & footer (+ auth modal & toast).
+ * THE single source of truth for the site header & footer (+ toast).
  * Included identically on every page:
  *
  *   <div id="app-header"></div>
@@ -81,33 +81,6 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER (matches
 </footer>
 
 <!-- ══════════ AUTH MODAL ══════════ -->
-<div class="auth-overlay" id="authOverlay" hidden>
-  <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-    <button class="auth-close" id="authClose" aria-label="বন্ধ করুন">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="auth-logo">
-      <img class="logo-mark logo-mark--sm" src="assets/sheba-bazer-logo.png" width="104" alt="সেবা বাজার লোগো" />
-    </div>
-    <h2 class="auth-title" id="authTitle">লগইন করুন</h2>
-    <p class="auth-sub" id="authSub">আপনার মোবাইল নম্বর দিয়ে সহজেই লগইন করুন</p>
-    <form id="authForm" class="auth-form" novalidate>
-      <div class="field auth-name-field" id="authNameField" hidden>
-        <label class="field-label" for="authName">আপনার নাম <i>*</i></label>
-        <input type="text" id="authName" class="field-input" placeholder="নাম লিখুন" autocomplete="name" />
-        <p class="field-error">অনুগ্রহ করে আপনার নাম লিখুন।</p>
-      </div>
-      <div class="field">
-        <label class="field-label" for="authPhone">মোবাইল নম্বর <i>*</i></label>
-        <input type="tel" id="authPhone" class="field-input" placeholder="01XXXXXXXXX" inputmode="numeric" maxlength="11" autocomplete="tel" required />
-        <p class="field-error">সঠিক ১১-সংখ্যার মোবাইল নম্বর দিন।</p>
-      </div>
-      <button type="submit" class="btn btn-solid auth-submit" id="authSubmit">লগইন</button>
-    </form>
-    <p class="auth-switch"><span id="authSwitchText">নতুন অ্যাকাউন্ট চান?</span> <button class="auth-switch-btn" id="authSwitchBtn">সাইন আপ করুন</button></p>
-  </div>
-</div>
-
 <div class="toast" id="toast" role="status" aria-live="polite"></div>`;
 (function injectLayout() {
   var headerSlot = document.getElementById('app-header');

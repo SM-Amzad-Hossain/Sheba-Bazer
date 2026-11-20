@@ -33,9 +33,24 @@ verified service providers (মিস্ত্রি, ড্রাইভার, 
   dashboard: welcome band with role badge, live stats, request list
   (customer: own requests; provider: open requests in their upazila), profile editor
   with availability switch. Client-side accounts in localStorage
-  (demo: 01700000001 / 01700000002, password `demo123`); backed by `js/portal.js`.
-  Header লগইন/সাইন আপ buttons now link here
+  (demo accounts, password `demo123`: গ্রাহক 01700000001 · provider
+  01700000002 (কারেন্ট মিস্ত্রি) / 01700000003 (ডাঃ, সাতক্ষীরা সদর) / 01700000004
+  (ডাঃ, তালা) / 01700000005 (প্লাম্বার) / 01700000006 (এসি মিস্ত্রি));
+  accounts persist across reloads (session), login verifies against stored data;
+  লগআউট clears the session and lands on the লগইন tab. Backed by `js/portal.js`
+  + shared `js/accounts.js`. Header লগইন/সাইন আপ buttons link here
+- `services.html` / `service.html` — প্রোভাইডার তালিকা dynamic: এলাকার সেবা select
+  (category) অনুযায়ী `shebaBazarAccounts`-এর available providers দেখায়
+  (card → `service.html?id=<id>`); single provider pageও dynamic
+  (name/chips/ফোন/ঠিকানা/সদস্যতা/একই সেবার অন্যান্যরা, `?id=` ছাড়া first available);
+  availability off হলে সেবাদাতা তালিকায় দেখা যায় না
 - `privacy.html` / `terms.html` — গোপনীয়তা নীতি ও শর্তাবলি (footer legal links)
+
+Signup/login lives only in the portal (header লগইন/সাইন আপ → portal.html);
+the old unreachable header auth modal was removed. Account storage is a single
+shared store in `js/accounts.js` (`window.shebaAccounts`) used by portal +
+services + single-provider pages. NOTE: client-side demo — password hashing is
+obfuscation only; replace with a backend before real credentials.
 
 The shared footer matches the সেবা বাজার draft footer (medium green `#0a6b3c`,
 plain "সেবা বাজার" brand, দ্রুত লিংক: হোম/সেবাসমূহ/সেবা দিতে চাই/আমাদের সম্পর্কে,
