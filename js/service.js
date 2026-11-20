@@ -1,7 +1,9 @@
 /**
- * সেবা বাজার — Single provider page logic (service.html · ডাঃ নমুনা ১)
- * Share · copy number · review form (localStorage-backed aggregate).
- * Depends on main.js (window.shebaToast).
+ * সেবা বাজার — Single provider page logic (service.html?id=<provider account id>)
+ * Renders the provider from the shared account store (js/accounts.js) —
+ * name, service category, area, phone (tel:/wa.me/copy), member since,
+ * same-service providers — then share · review form (per-provider localStorage aggregate).
+ * Depends on main.js (window.shebaToast) and accounts.js.
  */
 'use strict';
 
@@ -9,16 +11,83 @@
   const $  = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const toast = (msg, type) => (window.shebaToast ? window.shebaToast(msg, type) : undefined);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
   const BN_DIGITS = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
   const toBn = (n) => String(n).split('').map(d => BN_DIGITS[+d] ?? d).join('');
 
   /* ────────────────────────────────────────────────
+     RESOLVE + RENDER the provider from the account store
+     ──────────────────────────────────────────────── */
+  const ACCOUNTS = window.shebaAccounts;
+  const params = new URLSearchParams(location.search);
+  const wantedId = params.get('id');
+  const provider = wantedId
+    ? (ACCOUNTS?.getAccount(wantedId) || null)
+    : (ACCOUNTS?.listOpenProviders()[0] || null);
+
+  function bnDate(iso) {
+    try {
+      return new Intl.DateTimeFormat('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(iso));
+    } catch { return new Date(iso).toLocaleDateString(); }
+  }
+  const displayPhone = (p) => (p ? toBn(p) : '—');
+  const areaLine = (a) => [a.upazila, a.district, a.division ? a.division + ' বিভাগ' : ''].filter(Boolean).join(', ');
+
+  function renderProvider(a) {
+    const letter = (a.name.trim()[0] || 'স').toUpperCase();
+    $('#spLetter').textContent = letter;
+    $('#spName').textContent = a.name;
+    $('#spSpec').textContent = `${a.service}${a.address ? ' · ' + a.address : ''}`;
+    $('#spServiceChip').textContent = a.service;
+    $('#spAreaChip').textContent = a.upazila || '—';
+    $('#spCrumbName').textContent = a.name;
+    $('#spCrumbService').textContent = a.service;
+    $('#spInfoPhone').textContent = displayPhone(a.phone);
+    $('#spAddress').textContent = a.address || areaLine(a) || 'ঠিকানা যুক্ত করা হয়নি';
+    $('#spMemberSince').textContent = a.createdAt ? bnDate(a.createdAt) : '—';
+    $('#spTagRow').innerHTML = `<span class="sp-tag">${esc(a.service)}</span><span class="sp-tag">আপনার এলাকার সেবাদাতা</span>${a.upazila ? `<span class="sp-tag">${esc(a.upazila)}</span>` : ''}`;
+    $('#spPriceName').textContent = a.service;
+    $('#spPhoneBig').textContent = displayPhone(a.phone);
+    const tel = `tel:${a.phone}`, wa = `https://wa.me/88${a.phone}`;
+    $$('.spTel').forEach((el) => { el.setAttribute('href', tel); });
+    $$('.spWa').forEach((el) => { el.setAttribute('href', wa); });
+    document.title = `${a.name} — ${a.service} | সেবা বাজার`;
+
+    /* same-service providers (pills) */
+    const others = (ACCOUNTS?.listOpenProviders() || []).filter((p) => p.id !== a.id && p.service === a.service);
+    const othersWrap = $('#spOthers');
+    if (othersWrap) {
+      othersWrap.innerHTML = others.map((p) => `<a class="sp-other-pill" href="service.html?id=${encodeURIComponent(p.id)}">${esc(p.name)}</a>`).join('');
+      const card = $('#spOthersCard');
+      if (card) card.hidden = others.length === 0;
+    }
+  }
+
+  function renderNotFound() {
+    $('#spName').textContent = 'সেবাদাতাটি খুঁজে পাওয়া যায়নি';
+    $('#spSpec').textContent = 'লিংকটি আবার যাচাই করুন, অথবা সেবাসমূহ পেজ থেকে খুঁজে নিন।';
+    $('#spCrumbName').textContent = 'পাওয়া যায়নি';
+    $('#spLetter').textContent = '?';
+    ['.sp-chips', '.sp-actions', '.sp-side', '.sp-mobile-cta', '#spOthersCard'].forEach((sel) => {
+      $$(sel).forEach((el) => { el.hidden = true; });
+    });
+    $$('.sp-card').forEach((el, i) => { if (i > 0) el.hidden = true; });
+    document.title = 'সেবাদাতা পাওয়া যায়নি | সেবা বাজার';
+  }
+
+  const active = (provider && provider.role === 'provider') ? provider : null;
+  if (active) renderProvider(active); else renderNotFound();
+
+  /* ────────────────────────────────────────────────
      SHARE + COPY NUMBER
      ──────────────────────────────────────────────── */
   const shareBtn = $('#shareBtn');
+  const shareText = active
+    ? `সেবা বাজারে ${active.name} (${active.service}, ${active.upazila || 'আপনার এলাকা'}) দেখুন।`
+    : 'সেবা বাজারে এই সেবাদাতাকে দেখুন।';
   if (shareBtn) shareBtn.addEventListener('click', async () => {
-    const data = { title: document.title, text: 'সেবা বাজারে ডাঃ নমুনা ১ (মেডিসিন বিশেষজ্ঞ, সাতক্ষীরা সদর) দেখুন।', url: location.href };
+    const data = { title: document.title, text: shareText, url: location.href };
     try {
       if (navigator.share) { await navigator.share(data); return; }
       throw new Error('no web share');
@@ -34,8 +103,9 @@
 
   const copyBtn = $('#copyNumberBtn');
   if (copyBtn) copyBtn.addEventListener('click', async () => {
+    if (!active) { toast('নম্বর পাওয়া যায়নি।', 'error'); return; }
     try {
-      await navigator.clipboard.writeText('০১XXX-XXXXXX');
+      await navigator.clipboard.writeText(active?.phone || '');
       toast('নম্বর কপি করা হয়েছে!');
     } catch {
       toast('কপি করা যায়নি — আবার চেষ্টা করুন।', 'error');
@@ -45,7 +115,7 @@
   /* ────────────────────────────────────────────────
      REVIEWS — localStorage-backed aggregate (per provider)
      ──────────────────────────────────────────────── */
-  const STORE_KEY = 'shebaBazarReviews:doctor-1';
+  const STORE_KEY = `shebaBazarReviews:${active ? active.id : 'unknown'}`;
   const loadReviews = () => {
     try { return JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch { return []; }
   };

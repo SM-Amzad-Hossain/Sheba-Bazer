@@ -16,53 +16,78 @@ const toBn = (n) => String(n).split('').map(d => BN_DIGITS[+d] ?? d).join('');
 const toast = (msg, type) => (window.shebaToast ? window.shebaToast(msg, type) : undefined);
 
 /* ────────────────────────────────────────────────
-   SAMPLE DOCTOR DATA (until the backend lands)
+   PROVIDERS — dynamic, from the shared account store
+   (shebaBazarAccounts · role=provider · available only).
+   Category = সেবা select; area = বিভাগ/জেলা/উপজেলা filter.
    ──────────────────────────────────────────────── */
-const DOCTORS = [
-  { name: 'ডাঃ নমুনা ১', specialty: 'মেডিসিন বিশেষজ্ঞ', division: 'খুলনা', district: 'সাতক্ষীরা', upazila: 'সাতক্ষীরা সদর' },
-  { name: 'ডাঃ নমুনা ২', specialty: 'সার্জারি বিশেষজ্ঞ', division: 'খুলনা', district: 'সাতক্ষীরা', upazila: 'সাতক্ষীরা সদর' },
-  { name: 'ডাঃ নমুনা ৩', specialty: 'গাইনি ও প্রসূতি',  division: 'খুলনা', district: 'সাতক্ষীরা', upazila: 'কালিয়ায়' },
-  { name: 'ডাঃ নমুনা ৪', specialty: 'শিশু বিশেষজ্ঞ',    division: 'খুলনা', district: 'সাতক্ষীরা', upazila: 'তালা' },
-  { name: 'ডাঃ নমুনা ৫', specialty: 'চক্ষু বিশেষজ্ঞ',   division: 'খুলনা', district: 'সাতক্ষীরা', upazila: 'কালিয়ায়' },
-  { name: 'ডাঃ নমুনা ৬', specialty: 'দন্ত চিকিৎসক',     division: 'খুলনা', district: 'সাতক্ষীরা', upazila: 'সাতক্ষীরা সদর' }
-];
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
 const PIN = '<svg class="doctor-pin" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="#e11d48" d="M12 2a7.4 7.4 0 0 0-7.4 7.4c0 5.5 7.4 12.6 7.4 12.6s7.4-7.1 7.4-12.6A7.4 7.4 0 0 0 12 2z"/><circle cx="12" cy="9.4" r="2.55" fill="#fff"/></svg>';
+const ACCOUNTS = window.shebaAccounts;
 
-/* This page is the doctor service — preselect it so the area-filter form validates */
-const preselect = $('#areaService');
-if (preselect) preselect.value = 'ডাক্তার পাওয়া';
+const areaServiceSelect = $('#areaService');
+/* This page defaults to the doctor service — preselect it so the area-filter form validates */
+if (areaServiceSelect) areaServiceSelect.value = 'ডাক্তার পাওয়া';
 
 const doctorGrid  = $('#doctorGrid');
 const doctorEmpty = $('#doctorEmpty');
 const countBadge  = $('#docCountBadge');
+const listTitle   = $('#svcListTitle');
 
-function renderDoctors(list) {
-  doctorGrid.innerHTML = list.map(d => `
-    <a class="doctor-card" href="service.html" data-upazila="${d.upazila}" aria-label="${d.name} — ${d.specialty}, ${d.upazila} — প্রোফাইল দেখুন">
-      <div class="doctor-photo" aria-hidden="true">ন</div>
+const state = { service: 'ডাক্তার পাওয়া', division: '', district: '', upazila: '' };
+
+const currentServiceName = () => areaServiceSelect?.value || 'ডাক্তার পাওয়া';
+const listTitleFor = (svc) => (svc === 'ডাক্তার পাওয়া' ? 'আপনার এলাকার বিশেষজ্ঞ ডাঃ' : `আপনার এলাকার ${svc}`);
+
+function visibleProviders() {
+  const all = ACCOUNTS ? ACCOUNTS.listOpenProviders() : [];
+  return all.filter((a) =>
+    a.service === state.service
+    && (!state.division || a.division === state.division)
+    && (!state.district || a.district === state.district)
+    && (!state.upazila || a.upazila === state.upazila)
+  );
+}
+
+function renderProviders() {
+  const list = visibleProviders();
+  doctorGrid.innerHTML = list.map((a) => `
+    <a class="doctor-card" href="service.html?id=${encodeURIComponent(a.id)}" data-upazila="${esc(a.upazila)}" aria-label="${esc(a.name)} — ${esc(a.service)}, ${esc(a.upazila)} — প্রোফাইল দেখুন">
+      <div class="doctor-photo" aria-hidden="true">${esc((a.name.trim()[0] || 'স').toUpperCase())}</div>
       <div class="doctor-info">
-        <h3 class="doctor-name">${d.name}</h3>
-        <p class="doctor-specialty">${d.specialty}</p>
-        <p class="doctor-location">${PIN}${d.upazila}</p>
+        <h3 class="doctor-name">${esc(a.name)}</h3>
+        <p class="doctor-specialty">${esc(a.service)}</p>
+        <p class="doctor-location">${PIN}${esc(a.upazila)}</p>
       </div>
     </a>`).join('');
   doctorEmpty.hidden = list.length !== 0;
+  doctorEmpty.textContent = `এই এলাকায় কোনো ${state.service} সেবাদাতা পাওয়া যায়নি — নিচের ফর্মে অনুরোধ পাঠিয়ে দিন।`;
   countBadge.textContent = `${toBn(list.length)} জন পাওয়া গেছে`;
+  if (listTitle) listTitle.textContent = listTitleFor(state.service);
 }
-renderDoctors(DOCTORS);
+
+/* re-render on page load with the preselected category */
+renderProviders();
+
+/* pick another সেবা — re-filter immediately (the form submit path also covers the area card) */
+areaServiceSelect?.addEventListener('change', () => {
+  state.service = currentServiceName();
+  renderProviders();
+});
 
 /* ────────────────────────────────────────────────
    AREA FILTER — filter the doctor list on submit
    (main.js emits sheba:filter-applied on this page)
    ──────────────────────────────────────────────── */
 document.addEventListener('sheba:filter-applied', (e) => {
-  const { division, district, upazila } = e.detail || {};
-  const list = DOCTORS.filter(d =>
-    d.division === division && d.district === district && (!upazila || d.upazila === upazila)
-  );
-  renderDoctors(list);
-  toast(`${upazila || district || division} এলাকায় ${toBn(list.length)} জন ডাক্তার পাওয়া গেছে।`);
+  const { division, district, upazila, service } = e.detail || {};
+  state.service = service || state.service;
+  state.division = division || '';
+  state.district = district || '';
+  state.upazila = upazila || '';
+  const list = visibleProviders();
+  renderProviders();
+  toast(`${upazila || district || division} এলাকায় ${toBn(list.length)} জন ${state.service} সেবাদাতা পাওয়া গেছে।`);
   $('.svc-list')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
@@ -118,6 +143,8 @@ otherGrid.addEventListener('click', (e) => {
   const name = btn.dataset.service;
   const serviceSelect = $('#areaService');
   if (serviceSelect) serviceSelect.value = name;
+  state.service = name;
+  renderProviders();
   toast(`সেবা বাছাই করা হয়েছে: ${name}`);
   $('#areaFilterForm')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
