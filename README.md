@@ -35,6 +35,11 @@ verified service providers (মিস্ত্রি, ড্রাইভার, 
   with availability switch. Client-side accounts in localStorage
   (demo: 01700000001 / 01700000002, password `demo123`); backed by `js/portal.js`.
   Header লগইন/সাইন আপ buttons now link here
+- `privacy.html` / `terms.html` — গোপনীয়তা নীতি ও শর্তাবলি (footer legal links)
+
+The shared footer matches the সেবা বাজার draft footer (medium green `#0a6b3c`,
+plain "সেবা বাজার" brand, দ্রুত লিংক: হোম/সেবাসমূহ/সেবা দিতে চাই/আমাদের সম্পর্কে,
+যোগাযোগ column, bottom bar with গোপনীয়তা নীতি · শর্তাবলি)
 - `js/components.js` — single source of truth for the shared header, footer, auth modal
   and toast (injected on every page; path-aware links + active nav)
 - `js/services.js` — services-page logic: renders doctor cards, filters them via the

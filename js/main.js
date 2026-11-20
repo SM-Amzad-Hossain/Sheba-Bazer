@@ -100,7 +100,7 @@ const pageKey = (document.body && document.body.dataset.page) || '';
 function onScroll() {
   header.classList.toggle('is-scrolled', window.scrollY > 12);
   // scrollspy
-  let current = ['services', 'about', 'blog', 'contact', 'portal'].includes(pageKey) ? pageKey : 'home';
+  let current = ['services', 'about', 'blog', 'contact', 'portal', 'privacy', 'terms'].includes(pageKey) ? pageKey : 'home';
   for (const key of ['services', 'about', 'contact']) {
     const el = spyTargets[key];
     if (el && el.getBoundingClientRect().top <= 120) current = key;
