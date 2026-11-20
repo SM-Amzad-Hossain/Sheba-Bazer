@@ -28,8 +28,8 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
     </nav>
 
     <div class="header-actions">
-      <button class="btn btn-outline btn-sm" data-auth-open="login">লগইন</button>
-      <button class="btn btn-solid btn-sm" data-auth-open="signup">সাইন আপ</button>
+      <a class="btn btn-outline btn-sm" href="portal.html#login">লগইন</a>
+      <a class="btn btn-solid btn-sm" href="portal.html#signup">সাইন আপ</a>
       <button class="hamburger" id="hamburger" aria-label="মেনু টগল করুন" aria-expanded="false" aria-controls="mobilePanel">
         <span></span><span></span><span></span>
       </button>
@@ -45,8 +45,8 @@ window.SHEBA_BAZER_HEADER = `<!-- ══════════ HEADER ══�
       <a href="about.html" class="mobile-link">আমাদের সম্পর্কে</a>
       <a href="contact.html" class="mobile-link">যোগাযোগ</a>
       <div class="mobile-auth">
-        <button class="btn btn-outline" data-auth-open="login">লগইন</button>
-        <button class="btn btn-solid" data-auth-open="signup">সাইন আপ</button>
+        <a class="btn btn-outline" href="portal.html#login">লগইন</a>
+        <a class="btn btn-solid" href="portal.html#signup">সাইন আপ</a>
       </div>
     </nav>
   </div>

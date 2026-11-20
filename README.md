@@ -28,6 +28,13 @@ verified service providers (মিস্ত্রি, ড্রাইভার, 
   loading state and localStorage outbox, direct call/WhatsApp buttons,
   address/email/office hours, stylized map tile linking to Google Maps, quick links);
   backed by `js/contact.js`
+- `portal.html` — গ্রাহক ও সেবাদাতা পোর্টাল: split gateway (লগইন/সাইন আপ tabs,
+  গ্রাহক/সেবাদাতা role cards, বিভাগ→জেলা→উপজেলা cascade for providers), then a
+  dashboard: welcome band with role badge, live stats, request list
+  (customer: own requests; provider: open requests in their upazila), profile editor
+  with availability switch. Client-side accounts in localStorage
+  (demo: 01700000001 / 01700000002, password `demo123`); backed by `js/portal.js`.
+  Header লগইন/সাইন আপ buttons now link here
 - `js/components.js` — single source of truth for the shared header, footer, auth modal
   and toast (injected on every page; path-aware links + active nav)
 - `js/services.js` — services-page logic: renders doctor cards, filters them via the
