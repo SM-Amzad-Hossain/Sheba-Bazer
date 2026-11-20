@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b6e3c" />
+  <title>পোর্টাল | সেবা বাজার — গ্রাহক ও সেবাদাতা অ্যাকাউন্ট</title>
+  <meta name="description" content="সেবা বাজার পোর্টাল — গ্রাহক ও সেবাদাতা অ্যাকাউন্ট। লগইন বা সাইন আপ করুন, আপনার অনুরোধ ও প্রোফাইল পরিচালনা করুন।" />
+  <meta property="og:title" content="পোর্টাল | সেবা বাজার" />
+  <meta property="og:description" content="গ্রাহক ও সেবাদাতা — আপনার অ্যাকাউন্ট এক জায়গায়।" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="assets/sheba-bazer-logo.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="page-services page-portal" data-page="portal">
+
+<div id="app-header"></div>
+
+<main>
+
+  <!-- Breadcrumb band -->
+  <section class="svc-hero about-hero" aria-label="সেবা বাজার পোর্টাল">
+    <div class="container">
+      <nav class="svc-crumb" aria-label="বর্তমান পাতা">
+        <a href="index.html">হোম</a>
+        <span class="svc-crumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page">পোর্টাল</span>
+      </nav>
+      <h1 class="svc-title about-title">সেবা বাজার পোর্টাল</h1>
+      <p class="svc-sub about-sub">গ্রাহক ও সেবাদাতা — আপনার অ্যাকাউন্ট, অনুরোধ ও প্রোফাইল এক জায়গায়।</p>
+    </div>
+  </section>
+
+  <!-- ══════════ GATEWAY (logged out) ══════════ -->
+  <section class="portal-gateway" id="portalGateway" aria-label="লগইন বা সাইন আপ">
+    <div class="container">
+      <div class="portal-shell">
+
+        <!-- Brand panel -->
+        <div class="portal-brand">
+          <img class="portal-brand-logo" src="assets/sheba-bazer-logo.png" width="92" alt="সেবা বাজার লোগো" />
+          <h2 class="portal-brand-title">আপনার অ্যাকাউন্টে স্বাগতম</h2>
+          <p class="portal-brand-text">লগইন করে আপনার অনুরোধ ট্র্যাক করুন, আর সেবাদাতা হলে প্রোফাইল ও লিড ম্যানেজ করুন।</p>
+          <ul class="portal-brand-list">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> এক ফর্মেই সেবার অনুরোধ পাঠান</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> যাচাইকৃত সেবাদাতার তালিকায় যুক্ত হন</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> সরাসরি, কোনো মধ্যস্বত্বভোগী ছাড়া</li>
+          </ul>
+          <div class="portal-demo">
+            <p class="portal-demo-title">ডেমো দিয়ে দেখুন</p>
+            <div class="portal-demo-btns">
+              <button type="button" class="portal-demo-btn" id="demoCustomerBtn">গ্রাহক ডেমো</button>
+              <button type="button" class="portal-demo-btn" id="demoProviderBtn">সেবাদাতা ডেমো</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form panel with tabs -->
+        <div class="portal-forms">
+          <div class="portal-tabs" role="tablist" aria-label="লগইন বা সাইন আপ">
+            <button type="button" class="portal-tab is-active" id="tabLogin" role="tab" aria-selected="true" aria-controls="panelLogin">লগইন</button>
+            <button type="button" class="portal-tab" id="tabSignup" role="tab" aria-selected="false" aria-controls="panelSignup">সাইন আপ</button>
+          </div>
+
+          <!-- LOGIN -->
+          <form id="panelLogin" class="portal-panel" role="tabpanel" aria-labelledby="tabLogin" novalidate>
+            <h2 class="portal-title">লগইন করুন</h2>
+            <p class="portal-hint">আপনার মোবাইল নম্বর ও পাসওয়ার্ড দিয়ে প্রবেশ করুন</p>
+            <div class="field">
+              <label class="field-label" for="loginPhone">মোবাইল নম্বর <i>*</i></label>
+              <input type="tel" id="loginPhone" class="field-input" placeholder="01XXXXXXXXX" inputmode="numeric" maxlength="11" autocomplete="tel" required />
+              <p class="field-error">সঠিক ১১-সংখ্যার মোবাইল নম্বর দিন।</p>
+            </div>
+            <div class="field">
+              <label class="field-label" for="loginPassword">পাসওয়ার্ড <i>*</i></label>
+              <input type="password" id="loginPassword" class="field-input" placeholder="পাসওয়ার্ড লিখুন" autocomplete="current-password" required />
+              <p class="field-error">পাসওয়ার্ড খালি রাখা যাবে না।</p>
+            </div>
+            <button type="submit" class="btn btn-solid btn-lg portal-submit">লগইন করুন</button>
+            <p class="portal-switch">এখনো অ্যাকাউন্ট নেই? <button type="button" class="portal-switch-btn" data-goto-tab="signup">সাইন আপ করুন</button></p>
+          </form>
+
+          <!-- SIGNUP -->
+          <form id="panelSignup" class="portal-panel" role="tabpanel" aria-labelledby="tabSignup" novalidate hidden>
+            <h2 class="portal-title">অ্যাকাউন্ট খুলুন</h2>
+            <p class="portal-hint">মিনিট খানেকেই গ্রাহক বা সেবাদাতা অ্যাকাউন্ট খুলুন</p>
+
+            <fieldset class="portal-role-group" aria-label="অ্যাকাউন্টের ধরন">
+              <legend class="field-label">আমি…</legend>
+              <div class="portal-role-cards">
+                <label class="portal-role-card is-checked">
+                  <input type="radio" name="accountRole" value="customer" checked />
+                  <span class="portal-role-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-3.9 3.6-7 8-7s8 3.1 8 7"/></svg></span>
+                  <span class="portal-role-name">গ্রাহক</span>
+                  <span class="portal-role-desc">সেবা পেতে চাই</span>
+                </label>
+                <label class="portal-role-card">
+                  <input type="radio" name="accountRole" value="provider" />
+                  <span class="portal-role-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 5.6L3 18.6a1.8 1.8 0 0 0 2.5 2.5l6.7-5.7a4.5 4.5 0 0 0 5.6-6l-3.2 3.2-2.6-2.6 3.7-3.7Z"/></svg></span>
+                  <span class="portal-role-name">সেবাদাতা</span>
+                  <span class="portal-role-desc">কাজ পেতে চাই</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="contact-grid">
+              <div class="field">
+                <label class="field-label" for="signupName">আপনার নাম <i>*</i></label>
+                <input type="text" id="signupName" class="field-input" placeholder="নাম লিখুন" autocomplete="name" required />
+                <p class="field-error">নামটি অন্তত ২ অক্ষরের হতে হবে।</p>
+              </div>
+              <div class="field">
+                <label class="field-label" for="signupPhone">মোবাইল নম্বর <i>*</i></label>
+                <input type="tel" id="signupPhone" class="field-input" placeholder="01XXXXXXXXX" inputmode="numeric" maxlength="11" autocomplete="tel" required />
+                <p class="field-error">সঠিক ১১-সংখ্যার মোবাইল নম্বর দিন।</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="signupPassword">পাসওয়ার্ড <i>*</i></label>
+              <input type="password" id="signupPassword" class="field-input" placeholder="কমপক্ষে ৬ অক্ষর" autocomplete="new-password" required />
+              <p class="field-error">পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।</p>
+            </div>
+
+            <!-- provider-only fields -->
+            <div class="portal-provider-fields" id="providerFields" hidden>
+              <div class="field">
+                <label class="field-label" for="providerService">আপনার সেবা <i>*</i></label>
+                <label class="select-wrap">
+                  <select id="providerService" class="select-input"><option value="">সেবা বেছে নিন</option></select>
+                  <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </label>
+                <p class="field-error">অনুগ্রহ করে সেবাটি বেছে নিন।</p>
+              </div>
+              <div class="contact-grid contact-grid--area">
+                <label class="select-wrap">
+                  <span class="sr-only">বিভাগ</span>
+                  <select id="providerDivision" class="select-input"><option value="">বিভাগ</option></select>
+                  <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </label>
+                <label class="select-wrap">
+                  <span class="sr-only">জেলা</span>
+                  <select id="providerDistrict" class="select-input" disabled><option value="">জেলা</option></select>
+                  <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </label>
+                <label class="select-wrap">
+                  <span class="sr-only">উপজেলা</span>
+                  <select id="providerUpazila" class="select-input" disabled><option value="">উপজেলা</option></select>
+                  <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </label>
+              </div>
+              <p class="field-error portal-area-error" id="providerAreaError" hidden>সেবাদাতা হতে হলে আপনার এলাকা বেছে নিন।</p>
+            </div>
+
+            <button type="submit" class="btn btn-solid btn-lg portal-submit">অ্যাকাউন্ট খুলুন</button>
+            <p class="portal-switch">আগে থেকেই অ্যাকাউন্ট আছে? <button type="button" class="portal-switch-btn" data-goto-tab="login">লগইন করুন</button></p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ DASHBOARD (logged in) ══════════ -->
+  <section class="portal-dashboard" id="portalDashboard" aria-label="আমার ড্যাশবোর্ড" hidden>
+    <div class="container">
+
+      <!-- Welcome band -->
+      <div class="portal-welcome">
+        <div class="portal-welcome-id">
+          <span class="portal-avatar" id="portalAvatar" aria-hidden="true">S</span>
+          <div>
+            <h2 class="portal-welcome-name" id="portalWelcomeName">স্বাগতম!</h2>
+            <p class="portal-welcome-meta"><span class="portal-role-badge" id="portalRoleBadge">গ্রাহক</span><span id="portalWelcomePhone"></span></p>
+          </div>
+        </div>
+        <button class="btn btn-outline-light portal-logout" id="portalLogoutBtn" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+          লগআউট
+        </button>
+      </div>
+
+      <!-- Stats row -->
+      <div class="portal-stats" id="portalStats"></div>
+
+      <div class="portal-dash-grid">
+        <!-- Main column: requests / leads -->
+        <div class="portal-panel-card">
+          <div class="portal-panel-head">
+            <h3 class="portal-panel-title" id="portalListTitle">আমার অনুরোধ</h3>
+            <a class="btn btn-outline btn-sm" id="portalListCta" href="index.html#request">নতুন অনুরোধ</a>
+          </div>
+          <div class="portal-request-list" id="portalRequestList"></div>
+          <div class="portal-empty" id="portalEmpty" hidden>
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5h6M9 3h6a2 2 0 0 1 2 2v14l-5-3-5 3V5a2 2 0 0 1 2-2Z"/></svg>
+            <p id="portalEmptyText"><strong>এখনো কোনো অনুরোধ নেই।</strong> সেবার অনুরোধ পাঠালে এখানে দেখতে পাবেন।</p>
+            <a class="btn btn-solid" href="index.html#request">সেবার অনুরোধ পাঠান</a>
+          </div>
+        </div>
+
+        <!-- Sidebar: profile editor -->
+        <aside class="portal-panel-card portal-profile" aria-label="প্রোফাইল">
+          <h3 class="portal-panel-title">প্রোফাইল</h3>
+          <form id="portalProfileForm" novalidate>
+            <div class="field">
+              <label class="field-label" for="profileName">আপনার নাম <i>*</i></label>
+              <input type="text" id="profileName" class="field-input" required />
+            </div>
+            <div class="field">
+              <label class="field-label" for="profilePhone">মোবাইল নম্বর</label>
+              <input type="text" id="profilePhone" class="field-input" readonly aria-readonly="true" />
+            </div>
+            <div class="field" id="profileServiceField" hidden>
+              <label class="field-label" for="profileService">আপনার সেবা</label>
+              <label class="select-wrap">
+                <select id="profileService" class="select-input"></select>
+                <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </label>
+            </div>
+            <div class="field">
+              <label class="field-label" for="profileAddress">ঠিকানা <span class="contact-optional">(ঐচ্ছিক)</span></label>
+              <input type="text" id="profileAddress" class="field-input" placeholder="বাড়ির ঠিকানা" />
+            </div>
+            <div id="profileProviderFields" hidden>
+              <label class="select-wrap">
+                <span class="sr-only">বিভাগ</span>
+                <select id="profileDivision" class="select-input"><option value="">বিভাগ</option></select>
+                <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </label>
+              <label class="select-wrap">
+                <span class="sr-only">জেলা</span>
+                <select id="profileDistrict" class="select-input" disabled><option value="">জেলা</option></select>
+                <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </label>
+              <label class="select-wrap">
+                <span class="sr-only">উপজেলা</span>
+                <select id="profileUpazila" class="select-input" disabled><option value="">উপজেলা</option></select>
+                <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </label>
+              <div class="portal-availability">
+                <label class="portal-switch-row" for="profileAvailable">
+                  <span>
+                    <strong>কাজ করতে আছি</strong>
+                    <small>বন্ধ থাকলে গ্রাহকরা আপনাকে পাবেন না</small>
+                  </span>
+                  <input type="checkbox" id="profileAvailable" role="switch" />
+                  <span class="portal-switch-ui" aria-hidden="true"></span>
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-solid portal-save">পরিবর্তন সংরক্ষণ করুন</button>
+            <p class="portal-verify-note" id="portalVerifyNote" hidden>আপনার যাচাই প্রক্রিয়া চলছে — <strong>যাচাই প্রক্রিয়াধীন</strong></p>
+            <a class="btn btn-outline portal-save" id="portalViewProfileBtn" href="service.html" hidden>আমার প্রোফাইল দেখুন</a>
+          </form>
+        </aside>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="app-footer"></div>
+
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/data-locations.js"></script>
+<script src="js/portal.js"></script>
+</body>
+</html>
