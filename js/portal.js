@@ -158,6 +158,9 @@ bindClear([loginPhone, loginPassword, signupName, signupPhone, signupPassword, s
 /* ── signup ── */
 panelSignup.addEventListener('submit', (e) => {
   e.preventDefault();
+  ACCOUNTS.ready.then(() => signup(e));
+});
+function signup(e) {
   const role = currentRole();
   const name = signupName.value.trim();
   const phone = signupPhone.value.trim();
@@ -207,11 +210,14 @@ panelSignup.addEventListener('submit', (e) => {
   syncRoleUI();
   signupCascade.set('', '', '');
   showDashboard(account.id);
-});
+}
 
 /* ── login ── */
 panelLogin.addEventListener('submit', (e) => {
   e.preventDefault();
+  ACCOUNTS.ready.then(() => login(e));
+});
+function login(e) {
   const phone = loginPhone.value.trim();
   const password = loginPassword.value;
 
@@ -229,14 +235,14 @@ panelLogin.addEventListener('submit', (e) => {
   toast('লগইন সফল! আবার স্বাগতম, ' + account.name.split(' ')[0] + '।');
   panelLogin.reset();
   showDashboard(account.id);
-});
+}
 
 /* ── demo quick login ── */
 function demoLogin(phone) {
   openTab('login', false);
   loginPhone.value = phone;
   loginPassword.value = 'demo123';
-  panelLogin.requestSubmit();
+  ACCOUNTS.ready.then(() => panelLogin.requestSubmit());
 }
 $('#demoCustomerBtn').addEventListener('click', () => demoLogin('01700000001'));
 $('#demoProviderBtn').addEventListener('click', () => demoLogin('01700000002'));
@@ -381,6 +387,9 @@ function showGateway(forceLogin = false) {
 
 profileForm.addEventListener('submit', (e) => {
   e.preventDefault();
+  ACCOUNTS.ready.then(() => saveProfile(e));
+});
+function saveProfile(e) {
   const id = getSession();
   const accounts = readAccounts();
   const account = accounts.find((a) => a.id === id);
@@ -409,7 +418,7 @@ profileForm.addEventListener('submit', (e) => {
   }
   toast('প্রোফাইল সংরক্ষিত হয়েছে!');
   renderDashboard(account.id);
-});
+}
 profileName.addEventListener('input', () => setFieldState(profileName, false));
 
 $('#portalLogoutBtn').addEventListener('click', () => {
@@ -420,12 +429,15 @@ $('#portalLogoutBtn').addEventListener('click', () => {
   showGateway(true);
 });
 
-/* ── boot (demo accounts are seeded by accounts.js) ── */
-const existing = getSession();
-if (existing && renderDashboard(existing)) {
-  /* already logged in */
-} else {
-  showGateway();
-}
+/* ── boot (wait for the file-backed seed before reading accounts) ── */
+const whenReady = (fn) => { ACCOUNTS.ready.then(fn); };
+whenReady(() => {
+  const existing = getSession();
+  if (existing && renderDashboard(existing)) {
+    /* already logged in */
+  } else {
+    showGateway();
+  }
+});
 
 })();
