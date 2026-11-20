@@ -1787,3 +1787,60 @@ a.portal-save { display: flex; justify-content: center; margin-top: 10px; text-d
 }
 .legal-list { color: var(--ink-soft); line-height: 1.85; padding-left: 22px; margin: 0 0 6px; }
 .legal-list li { margin-bottom: 8px; }
+
+/* ────────────────────────────────────────────────
+   সেবাসমূহ catalog page (services.html)
+   ──────────────────────────────────────────────── */
+.catalog { background: #fff; padding: 34px 0 12px; }
+.catalog-grid {
+  margin-top: 20px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.catalog-card {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: #fff; border: 1px solid #e2eee7; border-radius: var(--radius-md);
+  padding: 18px 16px; text-decoration: none; color: inherit;
+  box-shadow: 0 6px 18px rgba(11, 61, 36, 0.06);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.catalog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+  border-color: #a5dcc0;
+}
+.catalog-card:focus-visible { outline: 3px solid var(--green-600); outline-offset: 3px; }
+.catalog-icon {
+  flex: 0 0 auto;
+  width: 64px; height: 64px; border-radius: 18px;
+  background: var(--mint-soft); border: 1.5px solid #cbe9d7;
+  display: grid; place-items: center; color: var(--green-700);
+}
+.catalog-icon svg { width: 30px; height: 30px; }
+.catalog-body { min-width: 0; display: block; }
+.catalog-name {
+  display: block;
+  font-family: var(--font-display); font-weight: 700; letter-spacing: -.2px;
+  font-size: 1.08rem; line-height: 1.4; color: var(--headline);
+}
+.catalog-desc {
+  display: block; margin-top: 4px;
+  font-size: .8rem; line-height: 1.55; color: var(--ink-soft);
+}
+.catalog-cta {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 10px;
+  color: var(--green-700); font-weight: 600; font-size: .82rem;
+}
+.catalog-cta svg { width: 15px; height: 15px; transition: transform .2s ease; }
+.catalog-card:hover .catalog-cta svg { transform: translateX(4px); }
+.svc-help-grid--single { grid-template-columns: minmax(0, 560px); justify-content: center; }
+
+@media (max-width: 1024px) {
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .catalog { padding-top: 24px; }
+  .catalog-grid { grid-template-columns: 1fr; gap: 12px; }
+  .catalog-card { padding: 16px 14px; }
+  .catalog-icon { width: 56px; height: 56px; border-radius: 16px; }
+  .catalog-icon svg { width: 26px; height: 26px; }
+}

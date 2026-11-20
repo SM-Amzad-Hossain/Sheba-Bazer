@@ -8,10 +8,14 @@ verified service providers (মিস্ত্রি, ড্রাইভার, 
 
 - `index.html` — semantic markup for all sections (header, hero, area filter, services,
   trusted partners, request form, about, footer, auth modal)
-- `services.html` — ডাক্তার পাওয়া service-detail page: green hero band with breadcrumb,
-  stethoscope tile + live count badge, area-filter card (filters the doctor list),
-  doctor cards, ad banner carousel, help cards and an অন্যান্য সেবা quick-pick row
-  (doctor cards link to `service.html`)
+- `services.html` — সেবাসমূহ catalog page: green hero band with breadcrumb, grid-tile
+  + live count badge, 12 সেবা cards (line-icon + Bengali name + one-line blurb), each
+  card deep-links to `providers.html?service=<name>`; help CTA card at the bottom
+- `providers.html` — per-service provider listing page (deep-linked via `?service=`,
+  default ডাক্তার পাওয়া): green hero band with breadcrumb, service-specific
+  icon/title/sub + live count badge, area-filter card (filters that service's list),
+  provider cards, ad banner carousel, help cards and an অন্যান্য সেবা quick-pick row
+  (cards link to `service.html`)
 - `service.html` — single provider profile page (ডাঃ নমুনা ১): photo block, chips,
   call/WhatsApp/share actions, সেবাদাতা info card, price list, work-photo placeholders,
   schedule, working review form (localStorage-backed aggregate) and
@@ -39,9 +43,9 @@ verified service providers (মিস্ত্রি, ড্রাইভার, 
   accounts persist across reloads (session), login verifies against stored data;
   লগআউট clears the session and lands on the লগইন tab. Backed by `js/portal.js`
   + shared `js/accounts.js`. Header লগইন/সাইন আপ buttons link here
-- `services.html` / `service.html` — প্রোভাইডার তালিকা dynamic: এলাকার সেবা select
-  (category) অনুযায়ী `shebaBazarAccounts`-এর available providers দেখায়
-  (card → `service.html?id=<id>`); single provider pageও dynamic
+- `providers.html` / `service.html` — প্রোভাইডার তালিকা dynamic: এলাকার সেবা select
+  (category, `?service=<name>` দিয়ে deep-link) অনুযায়ী `shebaBazarAccounts`-এর
+  available providers দেখায় (card → `service.html?id=<id>`); single provider pageও dynamic
   (name/chips/ফোন/ঠিকানা/সদস্যতা/একই সেবার অন্যান্যরা, `?id=` ছাড়া first available);
   availability off হলে সেবাদাতা তালিকায় দেখা যায় না
 - `privacy.html` / `terms.html` — গোপনীয়তা নীতি ও শর্তাবলি (footer legal links)
@@ -67,7 +71,10 @@ plain "সেবা বাজার" brand, দ্রুত লিংক: হো
 যোগাযোগ column, bottom bar with গোপনীয়তা নীতি · শর্তাবলি)
 - `js/components.js` — single source of truth for the shared header, footer, auth modal
   and toast (injected on every page; path-aware links + active nav)
-- `js/services.js` — services-page logic: renders doctor cards, filters them via the
+- `js/services.js` — সেবাসমূহ catalog logic: renders the 12 সেবা cards from
+  `window.shebaServices` (deep-links into `providers.html?service=…`)
+- `js/providers.js` — provider-listing logic: picks the service from `?service=`,
+  updates hero copy/icon + list title, renders provider cards, filters them via the
   area-filter card, ad carousel, অন্যান্য সেবা quick-pick
 - `css/styles.css` — design system (self-hosted Hind Siliguri / Baloo Da 2,
   CSS custom properties, responsive breakpoints down to 360px)

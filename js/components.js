@@ -93,7 +93,7 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER (matches
   var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   var isHome = path === '' || path === 'index.html';
 
-  var navSpy = path === 'services.html' ? 'services'
+  var navSpy = (path === 'services.html' || path === 'providers.html') ? 'services'
     : (path === 'blog.html' || path === 'blog-post.html') ? 'blog'
     : path === 'about.html' ? 'about'
     : path === 'contact.html' ? 'contact' : null;

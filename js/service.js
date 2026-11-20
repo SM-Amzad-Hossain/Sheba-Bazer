@@ -40,7 +40,9 @@
     $('#spServiceChip').textContent = a.service;
     $('#spAreaChip').textContent = a.upazila || '—';
     $('#spCrumbName').textContent = a.name;
-    $('#spCrumbService').textContent = a.service;
+    const crumbSvc = $('#spCrumbService');
+    crumbSvc.textContent = a.service;
+    crumbSvc.href = 'providers.html?service=' + encodeURIComponent(a.service);
     $('#spInfoPhone').textContent = displayPhone(a.phone);
     $('#spAddress').textContent = a.address || areaLine(a) || 'ঠিকানা যুক্ত করা হয়নি';
     $('#spMemberSince').textContent = a.createdAt ? bnDate(a.createdAt) : '—';

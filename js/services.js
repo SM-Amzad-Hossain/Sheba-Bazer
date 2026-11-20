@@ -1,153 +1,56 @@
 /**
- * সেবা বাজার — Services page logic (ডাক্তার পাওয়া).
- * Renders the doctor cards, wires the area-filter card (filters the list),
- * the ad banner carousel and the "অন্যান্য সেবা" quick-pick row.
- * Depends on main.js having run first (window.shebaServices / shebaAdSlides / shebaToast).
+ * সেবা বাজার — সেবাসমূহ catalog page logic.
+ * Renders one card per service (window.shebaServices, filled by main.js);
+ * every card deep-links to the provider listing page with ?service=<name>.
  */
 'use strict';
 
 (function () {
 
-const $  = (s, c = document) => c.querySelector(s);
-const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const $ = (s, c = document) => c.querySelector(s);
 
 const BN_DIGITS = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
 const toBn = (n) => String(n).split('').map(d => BN_DIGITS[+d] ?? d).join('');
-const toast = (msg, type) => (window.shebaToast ? window.shebaToast(msg, type) : undefined);
 
-/* ────────────────────────────────────────────────
-   PROVIDERS — dynamic, from the shared account store
-   (shebaBazarAccounts · role=provider · available only).
-   Category = সেবা select; area = বিভাগ/জেলা/উপজেলা filter.
-   ──────────────────────────────────────────────── */
+const SERVICES = window.shebaServices || [];
+
+/* one-line Bengali blurb per service (keyed by SERVICES id) */
+const SERVICE_DESC = {
+  'poribohon':       'ট্রাক, পিকআপ ও গাড়ি ভাড়া — মালামাল এক জায়গা থেকে অন্য জায়গায়।',
+  'micro-driver':    'মাইক্রো ও প্রাইভেট কার ড্রাইভার ভাড়া নিন ঘন্টা বা ট্রিপ ভিত্তিতে।',
+  'current':         'বিদ্যুৎ লাইন, ফ্যান–লাইট ও সকেট মেরামতের কাজ।',
+  'ac':              'এসি সার্ভিস, গ্যাস রিফিল, মেরামত ও নতুন ইনস্টলেশন।',
+  'nirman-mistri':   'রাজমিস্ত্রি — দেওয়াল, প্লাস্টার, ইট-সুড়কি ও টাইলস কাজ।',
+  'nirman-thikedar': 'বাড়ি নির্মাণ ও রিনোভেশনের ঠিকাদারি — হাল থেকে শেষ।',
+  'engineer':        'সাইট ইঞ্জিনিয়ার ও ডিজাইন পরামর্শ — সঠিক মাপ, নিরাপদ ভিত।',
+  'haircut':         'ঘরে গিয়ে বা সেলুনে — হেয়ার কাটিং ও স্পা সেবা।',
+  'doctor':          'মেডিসিন, সার্জারি, গাইনি, শিশু — অভিজ্ঞ ডাক্তারদের সাথে সরাসরি।',
+  'plumber':         'পাইপ, ট্যাপ, বেসিন ও পানির লাইনের সব সমাধান।',
+  'rang':            'বাড়ি-ঘর রঙ, পুটি ও ফাইনফিনিশিং — রং মিস্ত্রি।',
+  'photographer':    'ওয়েডিং, ইভেন্ট, প্রোডাক্ট ফটোগ্রাফি ও ভিডিওগ্রাফি।',
+};
+
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
-const PIN = '<svg class="doctor-pin" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="#e11d48" d="M12 2a7.4 7.4 0 0 0-7.4 7.4c0 5.5 7.4 12.6 7.4 12.6s7.4-7.1 7.4-12.6A7.4 7.4 0 0 0 12 2z"/><circle cx="12" cy="9.4" r="2.55" fill="#fff"/></svg>';
-const ACCOUNTS = window.shebaAccounts;
+const grid = $('#catalogGrid');
+const countBadge = $('#svcCatalogCount');
 
-const areaServiceSelect = $('#areaService');
-/* This page defaults to the doctor service — preselect it so the area-filter form validates */
-if (areaServiceSelect) areaServiceSelect.value = 'ডাক্তার পাওয়া';
+if (countBadge) countBadge.textContent = `${toBn(SERVICES.length)} টি সেবা উপলব্ধ`;
 
-const doctorGrid  = $('#doctorGrid');
-const doctorEmpty = $('#doctorEmpty');
-const countBadge  = $('#docCountBadge');
-const listTitle   = $('#svcListTitle');
-
-const state = { service: 'ডাক্তার পাওয়া', division: '', district: '', upazila: '' };
-
-const currentServiceName = () => areaServiceSelect?.value || 'ডাক্তার পাওয়া';
-const listTitleFor = (svc) => (svc === 'ডাক্তার পাওয়া' ? 'আপনার এলাকার বিশেষজ্ঞ ডাঃ' : `আপনার এলাকার ${svc}`);
-
-function visibleProviders() {
-  const all = ACCOUNTS ? ACCOUNTS.listOpenProviders() : [];
-  return all.filter((a) =>
-    a.service === state.service
-    && (!state.division || a.division === state.division)
-    && (!state.district || a.district === state.district)
-    && (!state.upazila || a.upazila === state.upazila)
-  );
-}
-
-function renderProviders() {
-  const list = visibleProviders();
-  doctorGrid.innerHTML = list.map((a) => `
-    <a class="doctor-card" href="service.html?id=${encodeURIComponent(a.id)}" data-upazila="${esc(a.upazila)}" aria-label="${esc(a.name)} — ${esc(a.service)}, ${esc(a.upazila)} — প্রোফাইল দেখুন">
-      <div class="doctor-photo" aria-hidden="true">${esc((a.name.trim()[0] || 'স').toUpperCase())}</div>
-      <div class="doctor-info">
-        <h3 class="doctor-name">${esc(a.name)}</h3>
-        <p class="doctor-specialty">${esc(a.service)}</p>
-        <p class="doctor-location">${PIN}${esc(a.upazila)}</p>
-      </div>
-    </a>`).join('');
-  doctorEmpty.hidden = list.length !== 0;
-  doctorEmpty.textContent = `এই এলাকায় কোনো ${state.service} সেবাদাতা পাওয়া যায়নি — নিচের ফর্মে অনুরোধ পাঠিয়ে দিন।`;
-  countBadge.textContent = `${toBn(list.length)} জন পাওয়া গেছে`;
-  if (listTitle) listTitle.textContent = listTitleFor(state.service);
-}
-
-/* re-render on page load with the preselected category */
-renderProviders();
-/* …and again once the file-backed seed (account_db.txt) has landed */
-if (ACCOUNTS?.ready) ACCOUNTS.ready.then(renderProviders);
-
-/* pick another সেবা — re-filter immediately (the form submit path also covers the area card) */
-areaServiceSelect?.addEventListener('change', () => {
-  state.service = currentServiceName();
-  renderProviders();
-});
-
-/* ────────────────────────────────────────────────
-   AREA FILTER — filter the doctor list on submit
-   (main.js emits sheba:filter-applied on this page)
-   ──────────────────────────────────────────────── */
-document.addEventListener('sheba:filter-applied', (e) => {
-  const { division, district, upazila, service } = e.detail || {};
-  state.service = service || state.service;
-  state.division = division || '';
-  state.district = district || '';
-  state.upazila = upazila || '';
-  const list = visibleProviders();
-  renderProviders();
-  toast(`${upazila || district || division} এলাকায় ${toBn(list.length)} জন ${state.service} সেবাদাতা পাওয়া গেছে।`);
-  $('.svc-list')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
-/* ────────────────────────────────────────────────
-   AD BANNER — fade carousel (prev / next)
-   ──────────────────────────────────────────────── */
-const AD_SLIDES = window.shebaAdSlides || [
-  { badge: 'বিজ্ঞাপন', headline: 'আপনার ব্যবসার বিজ্ঞাপন এখানে দিন', sub: 'হাজারো মানুষের কাছে পৌঁছান', cta: 'বিজ্ঞাপন দিন' }
-];
-const adBadge = $('#svcAdBadge'), adHeadline = $('#svcAdHeadline'),
-      adSub = $('#svcAdSub'), adBtn = $('#svcAdCta'),
-      adEl = $('.svc-ad');
-let adIndex = 0, adTimer = null;
-
-function renderAd(i) {
-  adIndex = (i + AD_SLIDES.length) % AD_SLIDES.length;
-  adEl.classList.add('is-switching');
-  setTimeout(() => {
-    const s = AD_SLIDES[adIndex];
-    adBadge.textContent = s.badge;
-    adHeadline.textContent = s.headline;
-    adSub.textContent = s.sub;
-    adBtn.textContent = s.cta;
-    adEl.classList.remove('is-switching');
-  }, 160);
-}
-function startAdAutoplay() {
-  clearInterval(adTimer);
-  adTimer = setInterval(() => renderAd(adIndex + 1), 5000);
-}
-$('#svcAdPrev').addEventListener('click', () => { renderAd(adIndex - 1); startAdAutoplay(); });
-$('#svcAdNext').addEventListener('click', () => { renderAd(adIndex + 1); startAdAutoplay(); });
-adBtn.addEventListener('click', () => toast('বিজ্ঞাপনের জন্য কল করুন: ০১XXX-XXXXXX'));
-startAdAutoplay();
-
-/* ────────────────────────────────────────────────
-   অন্যান্য সেবা — quick-pick sets the area-card service
-   ──────────────────────────────────────────────── */
-const otherGrid = $('#svcOtherGrid');
-const OTHER_SERVICES = (window.shebaServices || []).filter(s => s.id !== 'doctor');
-
-otherGrid.innerHTML = OTHER_SERVICES.map(s => `
-  <button class="svc-other-item" type="button" data-service="${s.name}" aria-label="${s.name} — এই সেবাটি বেছে নিন">
-    <span class="svc-other-circle">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${s.icon}</svg>
+if (grid) {
+  grid.innerHTML = SERVICES.map((s) => `
+  <a class="catalog-card" role="listitem" href="providers.html?service=${encodeURIComponent(s.name)}" aria-label="${esc(s.name)} — সেবাদাতা দেখুন">
+    <span class="catalog-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${s.icon}</svg>
     </span>
-    <span class="svc-other-label">${s.name}</span>
-  </button>`).join('');
+    <span class="catalog-body">
+      <span class="catalog-name">${esc(s.name)}</span>
+      <span class="catalog-desc">${esc(SERVICE_DESC[s.id] || 'সরাসরি ফোন করে কথা বলুন।')}</span>
+      <span class="catalog-cta">সেবাদাতা দেখুন
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+      </span>
+    </span>
+  </a>`).join('');
+}
 
-otherGrid.addEventListener('click', (e) => {
-  const btn = e.target.closest('.svc-other-item');
-  if (!btn) return;
-  const name = btn.dataset.service;
-  const serviceSelect = $('#areaService');
-  if (serviceSelect) serviceSelect.value = name;
-  state.service = name;
-  renderProviders();
-  toast(`সেবা বাছাই করা হয়েছে: ${name}`);
-  $('#areaFilterForm')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-});
 })();
