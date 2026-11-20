@@ -46,6 +46,16 @@ verified service providers (মিস্ত্রি, ড্রাইভার, 
   availability off হলে সেবাদাতা তালিকায় দেখা যায় না
 - `privacy.html` / `terms.html` — গোপনীয়তা নীতি ও শর্তাবলি (footer legal links)
 
+Demo account seeds live in **`account_db.txt`** — a reusable JSON seed database
+at the repo root (stable ids `acct-001`…`acct-006`, plain demo passwords `demo123`,
+documented as demo-only). On first run the site fetches it and materializes accounts
+into browser storage with cyrb53-hashed passwords (plain passwords are never
+persisted); if the fetch fails (file://), the same data bundled inline in
+`js/accounts.js` is used. The same file can be reused/imported later — e.g. an
+import script for a future backend. Runtime-created accounts stay in
+`shebaBazarAccounts` (localStorage) as before. Consumers wait on
+`window.shebaAccounts.ready` before reading accounts.
+
 Signup/login lives only in the portal (header লগইন/সাইন আপ → portal.html);
 the old unreachable header auth modal was removed. Account storage is a single
 shared store in `js/accounts.js` (`window.shebaAccounts`) used by portal +

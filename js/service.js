@@ -22,9 +22,7 @@
   const ACCOUNTS = window.shebaAccounts;
   const params = new URLSearchParams(location.search);
   const wantedId = params.get('id');
-  const provider = wantedId
-    ? (ACCOUNTS?.getAccount(wantedId) || null)
-    : (ACCOUNTS?.listOpenProviders()[0] || null);
+  const storeReady = ACCOUNTS?.ready || Promise.resolve();
 
   function bnDate(iso) {
     try {
@@ -76,17 +74,24 @@
     document.title = 'সেবাদাতা পাওয়া যায়নি | সেবা বাজার';
   }
 
-  const active = (provider && provider.role === 'provider') ? provider : null;
-  if (active) renderProvider(active); else renderNotFound();
+  let active = null;
+  storeReady.then(() => {
+    const provider = wantedId
+      ? (ACCOUNTS?.getAccount(wantedId) || null)
+      : (ACCOUNTS?.listOpenProviders()[0] || null);
+    active = (provider && provider.role === 'provider') ? provider : null;
+    if (active) renderProvider(active); else renderNotFound();
+    renderAggregate();
+  });
 
   /* ────────────────────────────────────────────────
      SHARE + COPY NUMBER
      ──────────────────────────────────────────────── */
   const shareBtn = $('#shareBtn');
-  const shareText = active
-    ? `সেবা বাজারে ${active.name} (${active.service}, ${active.upazila || 'আপনার এলাকা'}) দেখুন।`
-    : 'সেবা বাজারে এই সেবাদাতাকে দেখুন।';
   if (shareBtn) shareBtn.addEventListener('click', async () => {
+    const shareText = active
+      ? `সেবা বাজারে ${active.name} (${active.service}, ${active.upazila || 'আপনার এলাকা'}) দেখুন।`
+      : 'সেবা বাজারে এই সেবাদাতাকে দেখুন।';
     const data = { title: document.title, text: shareText, url: location.href };
     try {
       if (navigator.share) { await navigator.share(data); return; }
@@ -115,12 +120,12 @@
   /* ────────────────────────────────────────────────
      REVIEWS — localStorage-backed aggregate (per provider)
      ──────────────────────────────────────────────── */
-  const STORE_KEY = `shebaBazarReviews:${active ? active.id : 'unknown'}`;
+  const STORE_KEY = () => `shebaBazarReviews:${active ? active.id : 'unknown'}`;
   const loadReviews = () => {
-    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch { return []; }
+    try { return JSON.parse(localStorage.getItem(STORE_KEY()) || '[]'); } catch { return []; }
   };
   const saveReviews = (list) => {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(list)); } catch { /* non-fatal */ }
+    try { localStorage.setItem(STORE_KEY(), JSON.stringify(list)); } catch { /* non-fatal */ }
   };
 
   const ratingBig    = $('#ratingBig');
@@ -204,6 +209,5 @@
     toast('আপনার রিভিউটি জমা হয়েছে — ধন্যবাদ!');
   });
 
-  renderAggregate();
   paintRateInput();
 })();

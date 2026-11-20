@@ -68,6 +68,8 @@ function renderProviders() {
 
 /* re-render on page load with the preselected category */
 renderProviders();
+/* …and again once the file-backed seed (account_db.txt) has landed */
+if (ACCOUNTS?.ready) ACCOUNTS.ready.then(renderProviders);
 
 /* pick another সেবা — re-filter immediately (the form submit path also covers the area card) */
 areaServiceSelect?.addEventListener('change', () => {
