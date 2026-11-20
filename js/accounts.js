@@ -9,7 +9,7 @@
  *
  * Single source of truth used by:
  *   portal.html   — signup / login / dashboard (js/portal.js)
- *   services.html — dynamic provider listing (js/services.js)
+ *   providers.html — dynamic provider listing (js/providers.js)
  *   service.html  — dynamic provider profile (js/service.js)
  */
 'use strict';

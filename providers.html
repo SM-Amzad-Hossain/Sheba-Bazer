@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b6e3c" />
+  <title>সেবাসমূহ | সেবা বাজার — আপনার এলাকার দক্ষ সেবাদাতা</title>
+  <meta name="description" content="সেবাসমূহ — আপনার এলাকার যাচাই করা সেবাদাতা খুঁজুন: ডাক্তার, মিস্ত্রি, ড্রাইভার, ফটোগ্রাফার পর্যন্ত। বিভাগ, জেলা ও উপজেলা দিয়ে বেছে নিন।" />
+  <meta property="og:title" content="সেবাসমূহ | সেবা বাজার" />
+  <meta property="og:description" content="আপনার এলাকার দক্ষ সেবাদাতা খুঁজুন — সরাসরি ফোন করে কথা বলুন।" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="assets/sheba-bazer-logo.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="page-services" data-page="services">
+
+<div id="app-header"></div>
+
+<main>
+
+  <!-- ══════════ SERVICE HERO BAND ══════════ -->
+  <section class="svc-hero" aria-label="সেবার বিবরণ">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="svc-crumb" aria-label="বর্তমান পাতা">
+        <a href="index.html">হোম</a>
+        <span class="svc-crumb-sep" aria-hidden="true">›</span>
+        <a href="services.html">সেবাসমূহ</a>
+        <span class="svc-crumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page" id="crumbService">ডাক্তার পাওয়া</span>
+      </nav>
+
+      <!-- Head: icon + title + count -->
+      <div class="svc-head">
+        <span class="svc-head-icon" id="svcHeadIcon" aria-hidden="true"></span>
+        <div class="svc-head-copy">
+          <h1 class="svc-title" id="svcTitle">ডাক্তার পাওয়া</h1>
+          <p class="svc-sub" id="svcSub">বিশেষজ্ঞ ডাক্তার ও চিকিৎসা সেবা।</p>
+          <span class="svc-count" id="docCountBadge" role="status">৬ জন পাওয়া গেছে</span>
+        </div>
+      </div>
+
+      <!-- Area filter card (inside the green band) -->
+      <form class="area-card svc-filter" id="areaFilterForm" novalidate aria-label="এলাকা নির্ধারণ করুন">
+        <h2 class="area-card-title svc-filter-title">আগে আপনার এলাকা নির্ধারণ করুন</h2>
+        <div class="area-grid">
+          <label class="select-wrap">
+            <span class="sr-only">বিভাগ বেছে নিন</span>
+            <select id="areaDivision" class="select-input" required><option value="">বিভাগ</option></select>
+            <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </label>
+          <label class="select-wrap">
+            <span class="sr-only">জেলা বেছে নিন</span>
+            <select id="areaDistrict" class="select-input" required disabled><option value="">জেলা</option></select>
+            <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </label>
+          <label class="select-wrap">
+            <span class="sr-only">উপজেলা বেছে নিন</span>
+            <select id="areaUpazila" class="select-input" required disabled><option value="">উপজেলা</option></select>
+            <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </label>
+          <label class="select-wrap">
+            <span class="sr-only">সেবা বেছে নিন</span>
+            <select id="areaService" class="select-input" required><option value="">সেবা</option></select>
+            <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </label>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══════════ DOCTOR LIST ══════════ -->
+  <section class="svc-list" aria-label="সেবাদাতাদের তালিকা">
+    <div class="container">
+      <h2 class="svc-section-title" id="svcListTitle">আপনার এলাকার বিশেষজ্ঞ ডাঃ</h2>
+      <div class="doctor-grid" id="doctorGrid"></div>
+      <p class="doctor-empty" id="doctorEmpty" hidden>এই এলাকায় এখনও কোনো সেবাদাতা নেই — নিচের ফর্মে অনুরোধ পাঠিয়ে দিন।</p>
+    </div>
+  </section>
+
+  <!-- ══════════ AD BANNER ══════════ -->
+  <section class="svc-ad-wrap" aria-label="বিজ্ঞাপন">
+    <div class="container">
+      <div class="svc-ad" role="region" aria-roledescription="carousel" aria-label="বিজ্ঞাপন">
+        <button class="svc-ad-arrow svc-ad-arrow--prev" id="svcAdPrev" aria-label="আগের বিজ্ঞাপন">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <span class="svc-ad-badge" id="svcAdBadge">বিজ্ঞাপন</span>
+        <p class="svc-ad-headline" id="svcAdHeadline">আপনার ব্যবসার বিজ্ঞাপন এখানে দিন</p>
+        <p class="svc-ad-sub" id="svcAdSub">হাজারো মানুষের কাছে পৌঁছান</p>
+        <button class="svc-ad-cta" id="svcAdCta">বিজ্ঞাপন দিন</button>
+        <button class="svc-ad-arrow svc-ad-arrow--next" id="svcAdNext" aria-label="পরের বিজ্ঞাপন">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ HELP CARDS ══════════ -->
+  <section class="svc-help" aria-label="সাহায্য">
+    <div class="container svc-help-grid">
+      <div class="help-card">
+        <h3 class="help-title">পছন্দের কাউকে পাননি?</h3>
+        <p class="help-text">নাম, নম্বর ও এলাকা দিয়ে অনুরোধ পাঠান, আমরা যোগাযোগ করিয়ে দিব।</p>
+        <a class="btn btn-solid btn-lg help-btn" href="index.html#request">সেবার অনুরোধ পাঠান</a>
+      </div>
+      <div class="help-card">
+        <h3 class="help-title">আপনি কি সেবাদাতা?</h3>
+        <p class="help-text">বিনা খরচে নিজের প্রোফাইল ও নম্বর যুক্ত করুন।</p>
+        <a class="btn btn-outline btn-lg help-btn" href="index.html#register">সেবাদাতা হিসেবে নিবন্ধন করুন</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ OTHER SERVICES ══════════ -->
+  <section class="svc-more" aria-label="অন্যান্য সেবা">
+    <div class="container">
+      <h2 class="svc-section-title">অন্যান্য সেবা</h2>
+      <div class="svc-other-grid" id="svcOtherGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<div id="app-footer"></div>
+
+<script src="js/components.js"></script>
+<script src="js/data-locations.js"></script>
+<script src="js/main.js"></script>
+<script src="js/accounts.js"></script>
+<script src="js/providers.js"></script>
+</body>
+</html>

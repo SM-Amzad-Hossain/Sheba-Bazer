@@ -308,7 +308,7 @@ function renderList(account) {
   if (account.role === 'provider') {
     portalListTitle.textContent = 'আপনার এলাকার অনুরোধ';
     portalEmptyText.innerHTML = '<strong>আপনার এলাকায় এখনো অনুরোধ নেই।</strong> গ্রাহকরা অনুরোধ পাঠালে এখানে দেখা যাবে।';
-    portalEmpty.querySelector('.btn').textContent = 'সেবা পেজ দেখুন';
+    portalEmpty.querySelector('.btn').textContent = 'সেবাসমূহ দেখুন';
     portalEmpty.querySelector('.btn').href = 'services.html';
   } else {
     portalListTitle.textContent = 'আমার অনুরোধ';
