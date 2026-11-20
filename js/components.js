@@ -70,9 +70,9 @@ window.SHEBA_BAZER_FOOTER = `<!-- ══════════ FOOTER (matches
 
     <div class="footer-col">
       <h3 class="footer-heading">যোগাযোগ</h3>
-      <p class="footer-contact"><strong>ঠিকানা:</strong> সাতক্ষীরা, খুলনা বিভাগ, বাংলাদেশ</p>
-      <p class="footer-contact"><strong>মোবাইল:</strong> <a class="footer-contact-link" href="tel:01700000000">০১XXX-XXXXXX</a></p>
-      <p class="footer-contact"><strong>ইমেইল:</strong> <a class="footer-contact-link" href="mailto:info@example.com">info@example.com</a></p>
+      <p class="footer-contact"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>ঠিকানা:</strong> সাতক্ষীরা, খুলনা বিভাগ, বাংলাদেশ</span></p>
+      <p class="footer-contact"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 11.91a16 16 0 0 0 6 6l3.27-1.27a2 2 0 0 1 2.11.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><strong>মোবাইল:</strong> <a class="footer-contact-link" href="tel:01700000000">০১XXX-XXXXXX</a></span></p>
+      <p class="footer-contact"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span><strong>ইমেইল:</strong> <a class="footer-contact-link" href="mailto:info@example.com">info@example.com</a></span></p>
     </div>
   </div>
   <div class="footer-bottom">

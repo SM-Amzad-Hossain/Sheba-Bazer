@@ -620,7 +620,11 @@ img, svg { display: block; }
 }
 .footer-link:hover { color: #ffffff; transform: translateX(4px); text-decoration: underline; text-underline-offset: 3px; }
 
-.footer-contact { font-size: .92rem; padding: 4px 0; color: #dcf0e4; line-height: 1.7; margin: 0; }
+.footer-contact {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .92rem; padding: 4px 0; color: #dcf0e4; line-height: 1.7; margin: 0;
+}
+.footer-contact svg { color: #8af0b4; flex: 0 0 auto; margin-top: 2px; }
 .footer-contact strong { color: #fff; font-weight: 700; }
 .footer-contact-link { color: #dcf0e4; text-decoration: none; }
 .footer-contact-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
